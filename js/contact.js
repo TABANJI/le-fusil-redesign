@@ -1,0 +1,1 @@
+document.querySelector('#contactForm')?.addEventListener('submit',e=>{e.preventDefault();if(e.currentTarget.reportValidity()){lefusilToast('Thank you. This demonstration form has been completed successfully.');e.currentTarget.reset()}});
