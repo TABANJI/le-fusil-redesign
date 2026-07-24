@@ -1,1 +1,80 @@
-<!doctype html><html lang="en" class="inner"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Product | LE FUSIL</title><meta name="description" content="Product details and showroom inquiry at LE FUSIL."><link rel="canonical" href="https://example.com/product.html"><meta property="og:title" content="LE FUSIL Product"><meta property="og:type" content="product"><meta name="twitter:card" content="summary"><link rel="icon" href="assets/icons/favicon.svg"><link rel="stylesheet" href="css/global.css"><link rel="stylesheet" href="css/index.css"><link rel="stylesheet" href="css/product.css"><link rel="stylesheet" href="css/responsive.css"></head><body><a class="skip-link" href="#main">Skip to content</a><div id="siteHeader"></div><main id="main"><section class="page-hero" style="padding-bottom:40px"><div class="container"><div class="breadcrumb"><a href="index.html">Home</a> / <a href="shop.html">Collection</a> / Product</div></div></section><section class="section"><div class="container" id="productMount"></div></section></main><div class="overlay lightbox" id="lightbox" aria-hidden="true"><button class="icon-btn overlay-close" data-close aria-label="Close image">×</button><img alt="Expanded product view"></div><div id="siteFooter"></div><script src="data/products.js"></script><script src="js/components.js"></script><script src="js/global.js"></script><script src="js/index.js"></script><script src="js/product.js"></script></body></html>
+<!doctype html>
+<html lang="en" class="inner">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Product | LE FUSIL</title>
+  <meta name="description" content="Product details and boutique inquiry at LE FUSIL.">
+  <link rel="canonical" href="https://example.com/product.html">
+  <meta property="og:title" content="LE FUSIL Product">
+  <meta property="og:description" content="Discover this selection at LE FUSIL.">
+  <meta property="og:type" content="product">
+  <meta property="og:image" content="">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/icons/favicon.svg">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/product.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="product-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="siteHeader"></div>
+  <main id="main">
+    <div class="product-shell" id="productMount" aria-live="polite"></div>
+  </main>
+
+  <div class="product-lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Fullscreen product gallery">
+    <button type="button" class="gallery-control lightbox-close" data-lightbox-close aria-label="Close fullscreen gallery">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 5 14 14M19 5 5 19"/></svg>
+    </button>
+    <button type="button" class="gallery-control lightbox-prev" data-lightbox-prev aria-label="Previous image">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>
+    </button>
+    <div class="lightbox-stage"><span class="gallery-placeholder" aria-hidden="true"></span><img id="lightboxImage" alt=""></div>
+    <button type="button" class="gallery-control lightbox-next" data-lightbox-next aria-label="Next image">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+    </button>
+    <div class="lightbox-count" id="lightboxCount" aria-live="polite"></div>
+  </div>
+
+  <div class="inquiry-modal" id="inquiryModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="inquiryTitle">
+    <div class="inquiry-backdrop" data-inquiry-close></div>
+    <div class="inquiry-dialog">
+      <button type="button" class="modal-close" data-inquiry-close aria-label="Close inquiry form">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 5 14 14M19 5 5 19"/></svg>
+      </button>
+      <div id="inquiryFormView">
+        <div class="eyebrow">Private Inquiry</div>
+        <h2 id="inquiryTitle">Request Availability</h2>
+        <p>Share your preferred contact details and the boutique will respond personally.</p>
+        <form id="inquiryForm">
+          <div class="form-grid">
+            <label>Full Name<input name="fullName" autocomplete="name" required></label>
+            <label>Phone Number<input name="phone" type="tel" autocomplete="tel" required></label>
+            <label>Email Address<input name="email" type="email" autocomplete="email" required></label>
+            <label>Preferred Contact Method<select name="contactMethod" required><option value="">Select one</option><option>Phone</option><option>Email</option><option>WhatsApp</option></select></label>
+          </div>
+          <label>Message<textarea name="message" rows="5" required></textarea></label>
+          <label class="consent"><input name="consent" type="checkbox" required><span>I understand that availability and eligibility are confirmed directly by the boutique.</span></label>
+          <button class="inquiry-submit" type="submit">Send Inquiry</button>
+        </form>
+      </div>
+      <div class="inquiry-success" id="inquirySuccess" hidden tabindex="-1">
+        <div class="success-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 12 4 4 8-9"/></svg></div>
+        <h2>Inquiry Prepared</h2>
+        <p>This demonstration form was completed successfully. No information has been sent.</p>
+        <button class="inquiry-submit" type="button" data-inquiry-close>Return to Product</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="mobileProductBar"></div>
+  <div id="siteFooter"></div>
+  <script src="data/products.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/global.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/product.js"></script>
+</body>
+</html>
