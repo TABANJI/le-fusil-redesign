@@ -77,10 +77,16 @@
   const lightbox=document.querySelector('#lightbox');
   const lightboxImage=document.querySelector('#lightboxImage');
   const lightboxCount=document.querySelector('#lightboxCount');
+  const lightboxPrev=document.querySelector('[data-lightbox-prev]');
+  const lightboxNext=document.querySelector('[data-lightbox-next]');
   const inquiry=document.querySelector('#inquiryModal');
   const form=document.querySelector('#inquiryForm');
   let currentIndex=0;
   let returnFocus=null;
+
+  if(gallery.length<2){
+    [lightboxPrev,lightboxNext].forEach(control=>{control.hidden=true;control.disabled=true});
+  }
 
   function setImage(index){
     currentIndex=(index+gallery.length)%gallery.length;
@@ -125,8 +131,8 @@
   lightboxImage.addEventListener('error',hideBrokenImage);
   document.querySelector('[data-open-lightbox]').addEventListener('click',event=>{updateLightbox();openLayer(lightbox,event.currentTarget)});
   document.querySelector('[data-lightbox-close]').addEventListener('click',()=>closeLayer(lightbox));
-  document.querySelector('[data-lightbox-prev]').addEventListener('click',()=>setImage(currentIndex-1));
-  document.querySelector('[data-lightbox-next]').addEventListener('click',()=>setImage(currentIndex+1));
+  lightboxPrev.addEventListener('click',()=>setImage(currentIndex-1));
+  lightboxNext.addEventListener('click',()=>setImage(currentIndex+1));
   document.querySelectorAll('[data-open-inquiry]').forEach(button=>button.addEventListener('click',event=>openLayer(inquiry,event.currentTarget)));
   document.querySelectorAll('[data-inquiry-close]').forEach(button=>button.addEventListener('click',()=>closeLayer(inquiry)));
   document.querySelector('[data-product-shortlist]').addEventListener('click',()=>setTimeout(syncProductShortlist));
