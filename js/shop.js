@@ -65,7 +65,7 @@
     else if(state.sort==='name-desc')result.sort((a,b)=>text(b,a));
     else if(state.sort==='price-asc')result.sort((a,b)=>a.price===null?1:b.price===null?-1:a.price-b.price);
     else if(state.sort==='price-desc')result.sort((a,b)=>a.price===null?1:b.price===null?-1:b.price-a.price);
-    else if(state.sort==='availability')result.sort((a,b)=>a.availabilityKey.localeCompare(b.availabilityKey));
+    else if(state.sort==='maker-asc')result.sort((a,b)=>a.brand.localeCompare(b.brand,undefined,{sensitivity:'base'})||text(a,b));
     else result.sort((a,b)=>Number(Boolean(b.featured))-Number(Boolean(a.featured))||a._index-b._index);
     return result;
   }
@@ -92,8 +92,10 @@
     const list=sorted(filtered());
     const shown=list.slice(0,visibleCount);
     const fragment=document.createDocumentFragment();
-    shown.forEach(item=>{const template=document.createElement('template');template.innerHTML=productCard(item).trim();fragment.appendChild(template.content.firstElementChild)});
+    shown.forEach((item,index)=>{const template=document.createElement('template');template.innerHTML=productCard(item).trim();fragment.appendChild(template.content.firstElementChild);if(index===5&&!state.q&&!activeCount()){const editorial=document.createElement('aside');editorial.className='collection-editorial-break';editorial.innerHTML='<div class="eyebrow">Private Showroom Selection</div><h2>Selected for Personal Viewing.</h2><p>Discover the current collection in person and receive individual guidance from the LE FUSIL team.</p><a href="appointment.html?source=collection">Book a Private Viewing <span aria-hidden="true">→</span></a>';fragment.appendChild(editorial)}});
     grid.replaceChildren(fragment);
+    grid.setAttribute('aria-busy','false');
+    grid.querySelectorAll('.card-secondary').forEach(link=>{const url=new URL(link.href,location.href);url.searchParams.set('source','collection');url.searchParams.set('lang',window.LEFUSIL_LOCALE?.current||'en');link.href=`${url.pathname.split('/').pop()}?${url.searchParams}`});
     grid.classList.toggle('view-two',view==='two');
     document.querySelectorAll('[data-view]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.view===view)));
     document.querySelector('#resultCount').textContent=`${list.length} ${list.length===1?'Piece':'Pieces'}`;

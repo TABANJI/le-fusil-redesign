@@ -18,20 +18,23 @@
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/shop.css">
+  <link rel="stylesheet" href="css/shop-luxury.css">
+  <script src="data/translations/shop-luxury.js"></script>
   <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body class="shop-page">
   <a class="skip-link" href="#main">Skip to content</a>
   <div id="siteHeader"></div>
   <main id="main">
-    <section class="collection-hero">
-      <div class="collection-hero-texture" aria-hidden="true"></div>
-      <div class="collection-container">
+    <section class="collection-hero" aria-labelledby="collectionTitle">
+      <picture class="collection-hero-media" aria-hidden="true"><source type="image/webp" srcset="assets/images/showroom/optimized/le-fusil-collection-wall-640.webp 640w, assets/images/showroom/optimized/le-fusil-collection-wall-1240.webp 1240w"><img src="assets/images/showroom/le-fusil-collection-wall.jpg" width="1240" height="626" alt="" fetchpriority="high" decoding="async"></picture><div class="collection-hero-texture" aria-hidden="true"></div>
+      <div class="collection-container collection-hero-content">
         <nav class="collection-breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Collection</span></nav>
-        <div class="eyebrow">The Collection</div>
-        <h1>Precision. Heritage.<br>Performance.</h1>
-        <p>Curated sporting arms, equipment and field essentials selected for discerning clients.</p>
-        <span class="hero-rule" aria-hidden="true"></span>
+        <div class="eyebrow">The LE FUSIL Collection</div>
+        <h1 id="collectionTitle">Fine Sporting Arms,<br>Curated with Purpose.</h1>
+        <p>Explore a considered selection of shotguns, sporting rifles and field equipment, presented for personal consultation and in-store viewing.</p>
+        <div class="collection-hero-actions"><a class="btn" href="#collectionGrid">View All Pieces</a><a class="btn btn-outline" href="appointment.html?source=collection">Book a Private Viewing</a></div>
+        <div class="collection-stats"><span><strong id="heroPieceCount">0</strong> pieces</span><span><strong id="heroMakerCount">0</strong> makers</span><span>Beirut showroom</span><span>Current collection · Availability confirmed personally</span></div>
       </div>
     </section>
 
@@ -45,7 +48,7 @@
             <input id="shopSearch" type="search" placeholder="Search collection" autocomplete="off">
             <button type="button" class="search-clear" id="searchClear" aria-label="Clear collection search" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17"/></svg></button>
           </div>
-          <label class="sort-control"><span>Sort by</span><select id="sort" aria-label="Sort collection"><option value="featured">Featured</option><option value="name-asc">Name: A–Z</option><option value="name-desc">Name: Z–A</option><option value="price-asc">Price: Low to High</option><option value="price-desc">Price: High to Low</option><option value="availability">Availability</option></select></label>
+          <label class="sort-control"><span>Sort by</span><select id="sort" aria-label="Sort collection"><option value="featured">Featured</option><option value="name-asc">Name: A–Z</option><option value="name-desc">Name: Z–A</option><option value="price-asc">Price: Low to High</option><option value="price-desc">Price: High to Low</option><option value="maker-asc">Maker: A–Z</option></select></label>
           <button type="button" class="toolbar-clear" id="toolbarClear" hidden>Clear Filters</button>
           <div class="view-controls" aria-label="Grid view">
             <button type="button" data-view="three" aria-label="Three-column view" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="5" height="16"/><rect x="9.5" y="4" width="5" height="16"/><rect x="16" y="4" width="5" height="16"/></svg></button>
@@ -56,7 +59,8 @@
       </div>
     </section>
 
-    <section class="collection-main">
+    <nav class="collection-browse" aria-label="Browse the collection"><div class="collection-container"><span>Browse by Maker</span><div id="makerLinks"></div><span>Browse by Category</span><div id="categoryLinks"></div></div></nav>
+    <section class="collection-main" id="collectionGrid">
       <div class="collection-container catalog-layout">
         <aside class="filters" id="filters" aria-hidden="false">
           <div class="filter-drawer-head"><h2>Filters</h2><button type="button" id="closeFilters" aria-label="Close filters"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
@@ -65,7 +69,7 @@
         </aside>
         <div class="catalog-results">
           <div class="active-filters" id="activeFilters" aria-label="Active filters" hidden></div>
-          <div class="products-grid catalog-grid" id="productGrid"></div>
+          <div class="products-grid catalog-grid" id="productGrid" aria-busy="true"><div class="catalog-skeleton"></div><div class="catalog-skeleton"></div><div class="catalog-skeleton"></div></div>
           <div class="collection-empty" id="emptyState" hidden>
             <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="28" cy="28" r="17"/><path d="m40 40 14 14M20 28h16"/></svg>
             <h2>No Pieces Match Your Selection</h2>
@@ -88,6 +92,7 @@
   <script defer src="js/global.js"></script>
   <script defer src="js/index.js"></script>
   <script defer src="js/shop.js"></script>
+  <script defer src="js/shop-luxury.js"></script>
   <script defer src="js/i18n.js"></script><script defer src="js/seo-localization.js"></script><script defer src="js/consent-manager.js"></script><script defer src="js/analytics-events.js"></script>
 </body>
 </html>
