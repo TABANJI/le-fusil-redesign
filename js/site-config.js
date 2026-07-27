@@ -14,7 +14,7 @@
     }
   };
   global.LEFUSIL_SITE_CONFIG={brandName:'LE FUSIL',legalBusinessName:'TO_BE_CONFIRMED',phone:'TO_BE_CONFIRMED',whatsapp:'TO_BE_CONFIRMED',email:'TO_BE_CONFIRMED',address,locality:location.locality,region:location.region,country:location.country,mapSearchQuery,mapsUrl:`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapSearchQuery)}`,showroomLabel:location.showroomLabel,location,openingHours:{configured:false,timezone:'Asia/Beirut',days:[],notice:'Hours to be confirmed'},social:{instagram:'TO_BE_CONFIRMED',facebook:'TO_BE_CONFIRMED'},defaultLocale:'en',supportedLocales:['en','ar','fr'],localeLabels:{en:'English',ar:'العربية',fr:'Français'},currency:'USD',timezone:'Asia/Beirut',appointment:{enabled:true,maxAdvanceDays:180,timeWindows:['Morning','Afternoon','Evening']},consentVersion:'2026-07-draft',privacyPolicyVersion:'2026-07-draft',analytics:{enabled:false,debug:false},productionDomain:'REPLACE_BEFORE_PRODUCTION',pwa:{autoRegister:false},isConfigured:value=>!pending(value)};
-  ['css/i18n.css','css/consent.css'].forEach(href=>{if(!document.querySelector(`link[href="${href}"]`)){const link=document.createElement('link');link.rel='stylesheet';link.href=href;document.head.append(link)}});
+  ['css/design-system.css','css/i18n.css','css/consent.css'].forEach(href=>{if(!document.querySelector(`link[href="${href}"]`)){const link=document.createElement('link');link.rel='stylesheet';link.href=href;document.head.append(link)}});
 
   function applyLocation(){
     const config=global.LEFUSIL_SITE_CONFIG,locale=global.LEFUSIL_LOCALE?.current||document.documentElement.lang||'en',copy=config.location.localized[locale]||config.location.localized.en;
