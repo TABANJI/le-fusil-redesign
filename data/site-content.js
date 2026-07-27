@@ -1,0 +1,1 @@
+(function(g){g.LEFUSIL_SITE_CONTENT={schemaVersion:1,locales:['en','ar','fr'],fallbackLocale:'en',productLocalization:{},openingHoursFallback:{en:'Hours to be confirmed',fr:'Horaires à confirmer',ar:'ساعات العمل قيد التأكيد'}};})(window);
