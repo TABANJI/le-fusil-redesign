@@ -5,16 +5,20 @@
   const version = global.LEFUSIL_SITE_CONFIG.consentVersion;
   const defaults = { necessary: true, preferences: false, analytics: false, marketing: false, version, timestamp: null };
   let opener = null;
+  let current = null;
 
   function read() {
     try {
       const value = JSON.parse(localStorage.getItem(storageKey));
-      return value?.version === version ? { ...defaults, ...value } : null;
+      const stored = value?.version === version ? { ...defaults, ...value, necessary: true } : null;
+      if (stored) current = stored;
+      return stored || current;
     } catch { return null; }
   }
 
   function write(value) {
     const state = { ...defaults, ...value, necessary: true, version, timestamp: new Date().toISOString() };
+    current = state;
     try { localStorage.setItem(storageKey, JSON.stringify(state)); } catch {}
     global.dispatchEvent(new CustomEvent('lefusil:consent', { detail: state }));
     global.lefusilAnalytics?.track('cookie_consent_updated', { locale: global.LEFUSIL_LOCALE?.current });
@@ -29,7 +33,7 @@
     return `<div class="consent-banner" id="consentBanner" role="region" aria-label="Cookie consent"><div><strong>Privacy preferences</strong><p>Necessary storage supports site features. Optional analytics and marketing remain disabled unless you consent.</p></div><div class="consent-actions"><button class="btn" data-consent-all>Accept All</button><button class="btn btn-outline" data-consent-reject>Reject Non-Essential</button><button class="footer-text-button" data-consent-manage>Manage Preferences</button></div></div><div class="consent-dialog" id="consentDialog" role="dialog" aria-modal="true" aria-labelledby="consentTitle" aria-hidden="true"><div class="consent-backdrop"></div><form class="consent-panel"><h2 id="consentTitle">Cookie Settings</h2><p>Choose optional categories. Necessary storage cannot be disabled.</p>${categories}<div class="consent-actions"><button class="btn" type="submit">Save</button><button class="btn btn-outline" type="button" data-consent-cancel>Cancel</button><button class="footer-text-button" type="button" data-consent-reset>Reset consent</button></div></form></div>`;
   }
 
-  function render() { const banner = document.querySelector('#consentBanner'); if (banner) banner.hidden = Boolean(read()); }
+  function render() { const banner = document.querySelector('#consentBanner'); if (banner) banner.hidden = Boolean(read() || current); }
   function open() {
     opener = document.activeElement;
     const dialog = document.querySelector('#consentDialog');
@@ -48,11 +52,17 @@
     global.lefusilI18n?.apply(document);
     render();
     document.addEventListener('click', (event) => {
-      if (event.target.closest('[data-consent-all]')) write({ preferences: true, analytics: true, marketing: true });
-      if (event.target.closest('[data-consent-reject]')) write(defaults);
-      if (event.target.closest('[data-consent-manage]')) open();
-      if (event.target.closest('[data-consent-cancel],.consent-backdrop')) close();
-      if (event.target.closest('[data-consent-reset]')) { try { localStorage.removeItem(storageKey); } catch {} close(); render(); }
+      if (event.target.closest('[data-consent-all]')) {
+        event.preventDefault(); write({ preferences: true, analytics: true, marketing: true }); close(); return;
+      }
+      if (event.target.closest('[data-consent-reject]')) {
+        event.preventDefault(); write({ preferences: false, analytics: false, marketing: false }); close(); return;
+      }
+      if (event.target.closest('[data-consent-manage]')) { event.preventDefault(); open(); return; }
+      if (event.target.closest('[data-consent-cancel],.consent-backdrop')) { event.preventDefault(); close(); return; }
+      if (event.target.closest('[data-consent-reset]')) {
+        event.preventDefault(); current = null; try { localStorage.removeItem(storageKey); } catch {} close(); render();
+      }
     });
     document.querySelector('#consentDialog form').addEventListener('submit', (event) => {
       event.preventDefault(); const data = new FormData(event.target);
@@ -68,5 +78,5 @@
       }
     });
   });
-  global.lefusilConsent = { get: () => read() || defaults, set: write, open };
+  global.lefusilConsent = { get: () => read() || current || { ...defaults }, set: write, open };
 })(window);
