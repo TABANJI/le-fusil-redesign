@@ -70,6 +70,7 @@ body{line-height:1.7}
 a,button,input,select,textarea,.product-card,.availability,.filter-chip,.custom-check{transition-duration:var(--motion-fast);transition-timing-function:var(--motion-ease)}
 .btn,.toast,.reveal{transition-duration:var(--motion-fast);transition-timing-function:var(--motion-ease)}
 button:disabled,input:disabled,select:disabled,textarea:disabled,[aria-disabled=true]{cursor:not-allowed;opacity:.46;filter:saturate(.55)}
+picture{display:block}
 :where(a,button,input,select,textarea,[tabindex]):focus-visible{outline:2px solid var(--accent-light);outline-offset:4px}
 .icon-btn,.gallery-control,.modal-close,.search-clear,.view-controls button,.filter-drawer-head button{display:grid;min-width:44px;min-height:44px;place-items:center}
 .icon-btn svg,.gallery-control svg,.modal-close svg,.search-clear svg,.view-controls svg,.filter-heading svg,.shortlist svg{stroke-width:1.5}

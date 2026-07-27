@@ -33,7 +33,7 @@
     <button type="button" class="gallery-control lightbox-prev" data-lightbox-prev aria-label="Previous image">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>
     </button>
-    <div class="lightbox-stage"><span class="gallery-placeholder" aria-hidden="true"></span><img id="lightboxImage" alt=""></div>
+    <div class="lightbox-stage"><span class="gallery-placeholder" aria-hidden="true"></span><picture><source id="lightboxSource" type="image/webp"><img id="lightboxImage" alt="" decoding="async"></picture></div>
     <button type="button" class="gallery-control lightbox-next" data-lightbox-next aria-label="Next image">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
     </button>
@@ -73,10 +73,10 @@
 
   <div id="mobileProductBar"></div>
   <div id="siteFooter"></div>
-  <script src="data/products.js"></script>
-  <script src="js/components.js"></script>
-  <script src="js/global.js"></script>
-  <script src="js/index.js"></script>
-  <script src="js/product.js"></script>
+  <script defer src="data/products.js"></script>
+  <script defer src="js/components.js"></script>
+  <script defer src="js/global.js"></script>
+  <script defer src="js/index.js"></script>
+  <script defer src="js/product.js"></script>
 </body>
 </html>

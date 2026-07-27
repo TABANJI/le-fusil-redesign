@@ -67,8 +67,8 @@
     <nav class="product-breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="shop.html">Collection</a><span aria-hidden="true">/</span><span aria-current="page">${escapeHtml(productLabel)}</span></nav>
     <section class="product-layout" aria-labelledby="productTitle">
       <div class="product-gallery" aria-label="Product gallery">
-        <div class="gallery-main"><span class="gallery-placeholder" aria-hidden="true"></span><img id="mainProductImage" alt="${escapeHtml(product.brand)} ${escapeHtml(product.name)} — view 1" decoding="async"><button type="button" class="fullscreen-button" data-open-lightbox>${icon('expand')} View Fullscreen</button></div>
-        <div class="gallery-thumbs" role="tablist" aria-label="Choose product image">${gallery.map((image,index)=>`<button type="button" class="gallery-thumb" role="tab" aria-selected="${index===0}" aria-label="View image ${index+1} of ${gallery.length}" data-gallery-index="${index}"><span class="gallery-placeholder" aria-hidden="true"></span>${image?`<img src="${escapeHtml(image)}" alt="" loading="lazy" decoding="async" onerror="this.hidden=true">`:''}</button>`).join('')}</div>
+        <div class="gallery-main"><span class="gallery-placeholder" aria-hidden="true"></span><picture><source id="mainProductSource" type="image/webp"><img id="mainProductImage" alt="${escapeHtml(product.brand)} ${escapeHtml(product.name)} — view 1" fetchpriority="high" decoding="async"></picture><button type="button" class="fullscreen-button" data-open-lightbox>${icon('expand')} View Fullscreen</button></div>
+        <div class="gallery-thumbs" role="tablist" aria-label="Choose product image">${gallery.map((image,index)=>`<button type="button" class="gallery-thumb" role="tab" aria-selected="${index===0}" aria-label="View image ${index+1} of ${gallery.length}" data-gallery-index="${index}"><span class="gallery-placeholder" aria-hidden="true"></span>${image?lefusilImages.thumb(image):''}</button>`).join('')}</div>
       </div>
       <aside class="product-info">
         <div class="info-intro"><div class="product-brand">${escapeHtml(product.brand||'LE FUSIL')}</div><h1 class="product-title" id="productTitle">${escapeHtml(product.name)}</h1>${clean(product.category)||clean(calibre)?`<p class="product-category">${clean(product.category)?escapeHtml(product.category):''}${clean(product.category)&&clean(calibre)?'<span aria-hidden="true"> / </span>':''}${clean(calibre)?escapeHtml(calibre):''}</p>`:''}<div class="product-status-row"><span class="availability ${status.className}">${status.label}</span><span class="product-reference">Ref. ${escapeHtml(reference)}</span></div></div>
@@ -82,9 +82,11 @@
     ${related.length?`<section class="product-section"><div class="section-heading"><div class="eyebrow">Selected Alternatives</div><h2>You May Also Consider</h2></div><div class="products-grid related-products">${related.map(productCard).join('')}</div></section>`:''}`;
 
   const mainImage=document.querySelector('#mainProductImage');
+  const mainSource=document.querySelector('#mainProductSource');
   const thumbs=[...document.querySelectorAll('[data-gallery-index]')];
   const lightbox=document.querySelector('#lightbox');
   const lightboxImage=document.querySelector('#lightboxImage');
+  const lightboxSource=document.querySelector('#lightboxSource');
   const lightboxCount=document.querySelector('#lightboxCount');
   const lightboxPrev=document.querySelector('[data-lightbox-prev]');
   const lightboxNext=document.querySelector('[data-lightbox-next]');
@@ -100,7 +102,7 @@
   function setImage(index){
     currentIndex=(index+gallery.length)%gallery.length;
     const source=gallery[currentIndex];
-    if(source){mainImage.src=source;mainImage.hidden=false}else{mainImage.removeAttribute('src');mainImage.hidden=true}
+    if(source){mainSource.srcset=lefusilImages.optimized(source,1600);mainImage.src=source;mainImage.hidden=false}else{mainSource.removeAttribute('srcset');mainImage.removeAttribute('src');mainImage.hidden=true}
     mainImage.alt=`${product.brand} ${product.name} — view ${currentIndex+1}`;
     thumbs.forEach((thumb,thumbIndex)=>thumb.setAttribute('aria-selected',String(thumbIndex===currentIndex)));
     if(lightbox.classList.contains('open'))updateLightbox();
@@ -108,7 +110,7 @@
   function hideBrokenImage(event){event.currentTarget.hidden=true;event.currentTarget.removeAttribute('src')}
   function updateLightbox(){
     const source=gallery[currentIndex];
-    if(source){lightboxImage.src=source;lightboxImage.hidden=false}else{lightboxImage.removeAttribute('src');lightboxImage.hidden=true}
+    if(source){lightboxSource.srcset=lefusilImages.optimized(source,1600);lightboxImage.src=source;lightboxImage.hidden=false}else{lightboxSource.removeAttribute('srcset');lightboxImage.removeAttribute('src');lightboxImage.hidden=true}
     lightboxImage.alt=`${product.brand} ${product.name} — fullscreen view ${currentIndex+1}`;
     lightboxCount.textContent=`${currentIndex+1} / ${gallery.length}`;
   }

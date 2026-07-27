@@ -1,3 +1,14 @@
+(function imageSources(){
+  const escape=(value)=>String(value??'').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+  const optimized=(source,width)=>{const parts=String(source).split('/');const file=parts.pop();const stem=file.replace(/\.[^.]+$/,'');return `${parts.join('/')}/optimized/${stem}-${width}.webp`};
+  const cardSizes='(max-width: 560px) calc(100vw - 48px), (max-width: 800px) calc(50vw - 30px), (max-width: 1100px) calc(50vw - 48px), min(28vw, 410px)';
+  window.lefusilImages={
+    optimized,
+    card(source,alt,options={}){if(!source)return'';const loading=options.loading||'lazy';return `<picture><source type="image/webp" srcset="${escape(optimized(source,640))} 640w" sizes="${cardSizes}"><img src="${escape(source)}" alt="${escape(alt)}" loading="${loading}" decoding="async" onerror="this.hidden=true"></picture>`},
+    thumb(source){if(!source)return'';return `<picture><source type="image/webp" srcset="${escape(optimized(source,640))}"><img src="${escape(source)}" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"></picture>`}
+  };
+})();
+
 (function buildGlobalComponents(){
   const path=(location.pathname.split('/').pop()||'index.html').toLowerCase();
   const current=path==='product.html'?'shop.html':path;
