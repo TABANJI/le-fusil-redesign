@@ -36,6 +36,7 @@
 .footer a,.footer-text-button{width:max-content;max-width:100%;margin:9px 0;color:#aaa79e;transition:color 180ms ease}
 .footer-text-button{display:block;padding:0;border:0;background:transparent;font:inherit;text-align:left}
 .footer-bottom{align-items:center;margin-top:48px}
+.footer>.container>.footer-bottom:first-child{margin-top:0}
 .footer-bottom nav{display:flex;gap:24px}
 .footer-bottom nav a{margin:0;color:#8f8c83}
 .legal-strip{border-top:1px solid rgba(255,255,255,.04);color:#aaa79e}
