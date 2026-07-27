@@ -7,7 +7,7 @@
 
 /* Keep mixed-aspect originals inside the fixed viewer frame instead of letting
    their intrinsic ratio participate in the gallery grid sizing. */
-.gallery-main>img,.lightbox-stage>img{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;box-sizing:border-box;object-fit:cover}
+.gallery-main>img,.lightbox-stage>img{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;box-sizing:border-box;object-fit:contain}
 .availability-unavailable{border-color:rgba(105,74,68,.22);background:rgba(105,74,68,.07);color:#76544e}
 .success-mark svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .mobile-product-bar{transition:transform 180ms ease}.mobile-product-bar.footer-visible{transform:translateY(110%)}
