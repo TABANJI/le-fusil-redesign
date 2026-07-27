@@ -1,0 +1,43 @@
+name: Deploy production site
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages-production
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: windows-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v6
+      - name: Run launch audit
+        shell: pwsh
+        run: ./scripts/qa/launch-audit.ps1
+      - name: Validate and build static release
+        shell: pwsh
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
+          PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL }}
+          ADMIN_ALLOWED_EMAIL: ${{ vars.ADMIN_ALLOWED_EMAIL }}
+        run: ./scripts/build-production.ps1
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy Pages artifact
+        id: deployment
+        uses: actions/deploy-pages@v4
