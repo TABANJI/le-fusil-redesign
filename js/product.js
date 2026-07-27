@@ -155,6 +155,9 @@
   form.addEventListener('submit',event=>{
     event.preventDefault();
     if(!form.reportValidity())return;
+    const data=new FormData(form),items=(()=>{try{return JSON.parse(localStorage.getItem('lefusil_admin_inquiries')||'[]')}catch{return[]}})();
+    items.unshift({id:`inquiry-${Date.now()}-${Math.random().toString(16).slice(2,8)}`,createdAt:new Date().toISOString(),name:String(data.get('fullName')||''),email:String(data.get('email')||''),phone:String(data.get('phone')||''),preferredContact:String(data.get('contactMethod')||''),productSlug:String(product.slug||''),productName:`${product.brand} ${product.name}`,message:String(data.get('message')||''),status:'New',demo:true});
+    localStorage.setItem('lefusil_admin_inquiries',JSON.stringify(items));
     // Demo only: connect an approved backend or email service here before production use.
     document.querySelector('#inquiryFormView').hidden=true;
     const success=document.querySelector('#inquirySuccess');success.hidden=false;success.focus();
