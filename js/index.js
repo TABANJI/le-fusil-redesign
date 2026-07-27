@@ -1,10 +1,17 @@
 (function homepageCollections(){
-  const products=window.LEFUSIL_PRODUCTS||[];
+  const products=window.LEFUSIL_PRODUCTS||[],locale=window.LEFUSIL_LOCALE?.current||'en',dictionary=window.LEFUSIL_TRANSLATIONS?.[locale]||{},translate=value=>dictionary[value]||value;
   const featuredGrid=document.querySelector('#featuredProducts');
   if(featuredGrid){featuredGrid.innerHTML=products.filter(product=>product.featured).slice(0,6).map(productCard).join('');syncShortlist()}
-  const countBy=key=>products.reduce((map,product)=>{const value=String(product[key]||'').trim();if(value)map.set(value,(map.get(value)||0)+1);return map},new Map());
+  const visibleProducts=products.filter(product=>product.visible!==false&&!['draft','archived','hidden'].includes(String(product.status||'').toLowerCase()));
+  const countBy=key=>visibleProducts.reduce((map,product)=>{const value=String(product[key]||'').trim();if(value)map.set(value,(map.get(value)||0)+1);return map},new Map());
   const brandGrid=document.querySelector('#brandGrid');
-  if(brandGrid){brandGrid.innerHTML=[...countBy('brand')].sort(([a],[b])=>a.localeCompare(b)).map(([brand,count])=>`<a class="house-link reveal${['Beretta','Benelli','Browning'].includes(brand)?' house-featured':''}" href="shop.html?brand=${encodeURIComponent(brand)}"><span>${brand}</span><small>${count} ${count===1?'piece':'pieces'}</small><b aria-hidden="true">↗</b></a>`).join('')}
+  if(brandGrid){
+    const counts=countBy('brand'),byName=new Map([...counts].map(([brand,count])=>[brand.toLocaleLowerCase('en'),{brand,count}])),configured=window.LEFUSIL_HOMEPAGE_CONFIG?.featuredMakers||[];
+    const makers=[...new Set(configured.map(name=>String(name).trim().toLocaleLowerCase('en')).filter(Boolean))].map(name=>byName.get(name)).filter(item=>item?.count>0).slice(0,6);
+    const countLabel=count=>`${new Intl.NumberFormat(locale).format(count)} ${translate(count===1?'piece':'pieces')}`,accessible=(brand,count)=>translate('View {count} {maker} pieces in the collection').replace('{count}',new Intl.NumberFormat(locale).format(count)).replace('{maker}',brand);
+    brandGrid.innerHTML=makers.map(({brand,count},index)=>{const params=new URLSearchParams({brand,lang:locale});return`<a class="house-link reveal${index===0?' house-featured':''}" href="shop.html?${params}" aria-label="${accessible(brand,count)}"><span dir="ltr">${brand}</span><small>${countLabel(count)}</small><b aria-hidden="true">→</b></a>`}).join('');
+    const all=document.querySelector('.houses-all-link');if(all){const params=new URLSearchParams({lang:locale});all.href=`shop.html?${params}`}
+  }
   const descriptions={'Double-Barrel':'Classic sporting configurations with enduring balance and character.','Semi-Automatic':'Contemporary field and sporting pieces from established makers.','Air Rifle':'Precision air rifles selected for sporting consultation.','Single Shot':'Purposeful single-shot formats with direct handling.','Ammunition':'Current sporting ammunition, subject to in-store verification.','Pump-Action':'Practical sporting configurations available for personal consultation.'};
   const images={'Double-Barrel':'assets/images/products/gamba-bohler-steel-12/optimized/gamba-bohler-steel-12-01-original-1600.webp','Semi-Automatic':'assets/images/products/benelli-raffaello-lord-20/optimized/benelli-raffaello-lord-20-01-original-1600.webp','Air Rifle':'assets/images/products/puncher-nemesis/optimized/puncher-nemesis-01-original-1600.webp','Single Shot':'assets/images/products/falcon-srl-410/optimized/falcon-srl-410-01-original-1600.webp','Ammunition':'assets/images/products/west-trap-75/optimized/west-trap-75-01-original-1600.webp','Pump-Action':'assets/images/products/remington-pump-action/optimized/remington-pump-action-01-original-1600.webp'};
   const categories=[...countBy('category')].sort(([a],[b])=>{const order=['Double-Barrel','Semi-Automatic','Air Rifle','Single Shot','Ammunition','Pump-Action'];return order.indexOf(a)-order.indexOf(b)});
