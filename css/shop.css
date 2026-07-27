@@ -13,3 +13,12 @@
 .shop-page .product-card-meta span+span:before{content:"•";margin-right:12px;color:var(--accent)}
 @media(max-width:1024px){.toolbar-clear{display:none}}
 @media(hover:hover) and (pointer:fine){.toolbar-clear:hover{color:#6f532e;border-color:#6f532e}}
+
+.collection-search,.sort-control{height:var(--control-height)}
+.filter-heading,.filter-option,.filter-chip,.clear-all,.toolbar-clear,.load-more,.mobile-filter-button{transition:color var(--motion-fast) var(--motion-ease),border-color var(--motion-fast) var(--motion-ease),background-color var(--motion-fast) var(--motion-ease)}
+.filter-chip,.clear-all{min-height:38px}
+.collection-empty{border:1px solid rgba(29,30,26,.07);background:#eae3d8;box-shadow:0 10px 30px rgba(29,28,24,.035)}
+.collection-empty h2{margin-bottom:14px}
+.collection-empty p{line-height:1.75}
+.shop-page .product-image img{padding:12px}
+@media(hover:hover) and (pointer:fine){.filter-option:hover{color:var(--text-primary)}.view-controls button:hover,.search-clear:hover{color:var(--accent);border-color:rgba(155,122,69,.28)}}
