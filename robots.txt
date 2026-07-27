@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tabanji.github.io/le-fusil-redesign/sitemap.xml

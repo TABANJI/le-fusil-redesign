@@ -130,6 +130,7 @@
 
   if(matchMedia('(max-width:800px)').matches)document.querySelector('#filters').setAttribute('aria-hidden','true');
   syncForm();render();
-  const itemList={"@context":"https://schema.org","@type":"CollectionPage",name:"The Collection | LE FUSIL",description:"Curated sporting arms, equipment and field essentials selected for discerning clients.",mainEntity:{"@type":"ItemList",itemListElement:products.map((item,index)=>({"@type":"ListItem",position:index+1,url:new URL(`product.html?slug=${encodeURIComponent(item.slug)}`,location.href).href,name:item.name}))}};
+  const productionBase='https://tabanji.github.io/le-fusil-redesign/';
+  const itemList={"@context":"https://schema.org","@type":"CollectionPage",name:"Explore the Collection | LE FUSIL",url:`${productionBase}shop.html`,description:"Curated sporting arms, equipment and field essentials selected for personal showroom presentation.",mainEntity:{"@type":"ItemList",itemListElement:products.map((item,index)=>({"@type":"ListItem",position:index+1,url:`${productionBase}product.html?slug=${encodeURIComponent(item.slug)}`,name:item.name}))}};
   const schema=document.createElement('script');schema.type='application/ld+json';schema.textContent=JSON.stringify(itemList);document.head.appendChild(schema);
 })();

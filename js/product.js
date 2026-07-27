@@ -22,6 +22,12 @@
   };
   const escapeHtml=(value)=>String(value??'').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
   const clean=(value)=>value!==undefined&&value!==null&&String(value).trim()!=='';
+  const productionBase='https://tabanji.github.io/le-fusil-redesign/';
+  const upsertMeta=(selector,attribute,value)=>{
+    let element=document.head.querySelector(selector);
+    if(!element){element=document.createElement('meta');const match=selector.match(/meta\[(name|property)="([^"]+)"\]/);if(match)element.setAttribute(match[1],match[2]);document.head.appendChild(element)}
+    element.setAttribute(attribute,value);
+  };
   const priceText=(item)=>item.priceOnRequest||!Number(item.price)?'Price on Request':new Intl.NumberFormat('en-US',{style:'currency',currency:item.currency||'USD',maximumFractionDigits:0}).format(item.price);
   const availability=(value)=>{
     const raw=String(value||'On Request').toLowerCase();
@@ -35,6 +41,7 @@
     mount.innerHTML=`<section class="not-found"><div class="eyebrow">LE FUSIL Collection</div><h1>Product Not Found</h1><p>The requested item could not be found. Explore the current collection or speak with the boutique for personal assistance.</p><div class="not-found-actions"><a class="btn btn-dark" href="shop.html">Return to Collection</a><a class="btn btn-outline" href="contact.html">Contact the Boutique</a></div></section>`;
     document.querySelector('#mobileProductBar')?.remove();
     document.title='Product Not Found | LE FUSIL';
+    upsertMeta('meta[name="robots"]','content','noindex, follow');
     return;
   }
 
@@ -42,6 +49,7 @@
   const gallery=images.length?images:[null];
   const status=availability(product.availability);
   const reference=product.sku||`LF-${String(product.id).padStart(4,'0')}`;
+  const productLabel=String(product.name).toLowerCase().startsWith(String(product.brand).toLowerCase())?product.name:`${product.brand} ${product.name}`;
   const calibre=product.specifications?.Gauge||product.specifications?.Caliber;
   const description=product.description||product.shortDescription||'Contact the boutique for a complete product presentation.';
   const specs={Manufacturer:product.brand,Model:product.name,Category:product.category,...(product.specifications||{}),Origin:product.origin,Condition:product.condition,Reference:reference};
@@ -56,7 +64,7 @@
   const related=[...preferredRelated,...products.filter(item=>item.id!==product.id&&!preferredRelated.some(match=>match.id===item.id))].filter((item,index,array)=>array.findIndex(match=>match.id===item.id)===index).slice(0,3);
 
   mount.innerHTML=`
-    <nav class="product-breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="shop.html">Collection</a><span aria-hidden="true">/</span><a href="shop.html">${escapeHtml(product.category||'Product')}</a><span aria-hidden="true">/</span><span aria-current="page">${escapeHtml(product.name)}</span></nav>
+    <nav class="product-breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="shop.html">Collection</a><span aria-hidden="true">/</span><span aria-current="page">${escapeHtml(productLabel)}</span></nav>
     <section class="product-layout" aria-labelledby="productTitle">
       <div class="product-gallery" aria-label="Product gallery">
         <div class="gallery-main"><span class="gallery-placeholder" aria-hidden="true"></span><img id="mainProductImage" alt="${escapeHtml(product.brand)} ${escapeHtml(product.name)} — view 1" decoding="async"><button type="button" class="fullscreen-button" data-open-lightbox>${icon('expand')} View Fullscreen</button></div>
@@ -165,15 +173,29 @@
   if(footer&&mobileBar)new IntersectionObserver(entries=>mobileBar.classList.toggle('footer-visible',entries[0].isIntersecting),{threshold:.01}).observe(footer);
   syncShortlist();syncProductShortlist();setImage(0);
 
-  const title=`${product.brand} ${product.name} | LE FUSIL`;
-  const metaDescription=(product.shortDescription||description).slice(0,155);
+  const title=`${productLabel} | LE FUSIL`;
+  const suppliedDescription=[product.shortDescription,product.description].find(value=>clean(value)&&!/^to be confirmed$/i.test(String(value).trim()));
+  const metaDescription=(suppliedDescription||`Explore the ${product.brand} ${product.name}${product.category?` from the ${product.category} collection`:''} and request personal guidance from LE FUSIL.`).slice(0,155);
+  const productUrl=`${productionBase}product.html?slug=${encodeURIComponent(product.slug)}`;
   document.title=title;
   document.querySelector('meta[name="description"]')?.setAttribute('content',metaDescription);
+  document.querySelector('link[rel="canonical"]')?.setAttribute('href',productUrl);
   document.querySelector('meta[property="og:title"]')?.setAttribute('content',title);
   document.querySelector('meta[property="og:description"]')?.setAttribute('content',metaDescription);
-  const absoluteImages=images.map(image=>new URL(image,location.href).href);
-  if(absoluteImages[0])document.querySelector('meta[property="og:image"]')?.setAttribute('content',absoluteImages[0]);else document.querySelector('meta[property="og:image"]')?.remove();
-  const schema={"@context":"https://schema.org","@type":"Product",name:product.name,description:metaDescription,category:product.category,sku:reference,brand:product.brand?{"@type":"Brand",name:product.brand}:undefined,image:absoluteImages.length?absoluteImages:undefined};
+  upsertMeta('meta[property="og:url"]','content',productUrl);
+  upsertMeta('meta[property="og:image:alt"]','content',productLabel);
+  upsertMeta('meta[name="twitter:title"]','content',title);
+  upsertMeta('meta[name="twitter:description"]','content',metaDescription);
+  const absoluteImages=images.map(image=>new URL(image,productionBase).href);
+  if(absoluteImages[0]){
+    document.querySelector('meta[property="og:image"]')?.setAttribute('content',absoluteImages[0]);
+    upsertMeta('meta[name="twitter:image"]','content',absoluteImages[0]);
+    const socialImage=new Image();socialImage.addEventListener('load',()=>{upsertMeta('meta[property="og:image:width"]','content',String(socialImage.naturalWidth));upsertMeta('meta[property="og:image:height"]','content',String(socialImage.naturalHeight))},{once:true});socialImage.src=absoluteImages[0];
+  }
+  const schema={"@context":"https://schema.org","@type":"Product",name:product.name,description:metaDescription,category:product.category,sku:product.sku||undefined,brand:product.brand?{"@type":"Brand",name:product.brand}:undefined,image:absoluteImages.length?absoluteImages:undefined,url:productUrl};
+  if(Number.isFinite(product.price)&&product.price>0&&!product.priceOnRequest)schema.offers={"@type":"Offer",price:product.price,priceCurrency:product.currency||'USD',url:productUrl};
   Object.keys(schema).forEach(key=>schema[key]===undefined&&delete schema[key]);
   const schemaScript=document.createElement('script');schemaScript.type='application/ld+json';schemaScript.textContent=JSON.stringify(schema);document.head.appendChild(schemaScript);
+  const breadcrumbs={"@context":"https://schema.org","@type":"BreadcrumbList",itemListElement:[{"@type":"ListItem",position:1,name:'Home',item:productionBase},{"@type":"ListItem",position:2,name:'Collection',item:`${productionBase}shop.html`},{"@type":"ListItem",position:3,name:productLabel,item:productUrl}]};
+  const breadcrumbScript=document.createElement('script');breadcrumbScript.type='application/ld+json';breadcrumbScript.textContent=JSON.stringify(breadcrumbs);document.head.appendChild(breadcrumbScript);
 })();
