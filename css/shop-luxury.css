@@ -29,17 +29,21 @@ html[dir="rtl"] .collection-hero-texture{transform:scaleX(-1)}html[dir="rtl"] .c
   .shop-page .toolbar-summary,.shop-page .sort-control{align-self:start}
   .shop-page .sort-control{min-height:44px;align-items:flex-start}
   .shop-page .sort-control select{height:24px}
-  .shop-page .collection-browse .collection-container{min-height:48px;gap:20px;padding-inline-end:36px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-inline:contain;scroll-padding-inline:20px 36px;scrollbar-width:none;white-space:nowrap;-webkit-overflow-scrolling:touch}
+  .shop-page .collection-browse .collection-container{min-height:48px;align-items:center;gap:20px;padding-inline-end:36px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-inline:contain;scroll-padding-inline:20px 36px;scrollbar-width:none;white-space:nowrap;-webkit-overflow-scrolling:touch}
   .shop-page .collection-browse .collection-container::-webkit-scrollbar{display:none}
   .shop-page .collection-browse .collection-container>span{flex:0 0 auto;font-size:.59rem;letter-spacing:.08em;white-space:nowrap}
-  .shop-page .collection-browse #makerLinks,.shop-page .collection-browse #categoryLinks{display:flex;flex:0 0 auto;gap:20px}
-  .shop-page .collection-browse a{flex:0 0 auto;padding-inline:0;white-space:nowrap}
+  .shop-page .collection-browse #makerLinks,.shop-page .collection-browse #categoryLinks{display:flex;flex:0 0 auto;align-items:center;gap:20px}
+  .shop-page .collection-browse a{flex:0 0 auto;align-items:center;padding-inline:0;white-space:nowrap}
   .shop-page .collection-browse a small{margin-inline-start:4px;font-size:.62em;opacity:.64}
-  .shop-page .collection-main{padding-top:32px}
+  .shop-page .collection-main{padding-top:28px}
   .shop-page .collection-main .collection-container{width:min(calc(100% - 40px),1500px)}
   .shop-page .product-card{border:1px solid rgba(181,145,82,.18)}
   .shop-page .product-image{border:0}
   .shop-page .product-image img{padding:0}
+  .shop-page .product-info{padding-bottom:8px}
+  .shop-page .product-buyline{align-items:center}
+  .shop-page .card-secondary{white-space:nowrap}
+  .shop-page .card-secondary span{margin-inline-start:9px}
 }
 
 @media(max-width:600px){
