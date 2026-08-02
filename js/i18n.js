@@ -1,7 +1,7 @@
 (function internationalization(global){
   'use strict';
   const locale=global.LEFUSIL_LOCALE?.current||'en',dictionary=global.LEFUSIL_TRANSLATIONS?.[locale]||{},translate=value=>dictionary[String(value).trim()]||value;
-  function switcher(){return`<div class="language-switcher"><button class="language-toggle" type="button" aria-expanded="false" aria-label="Select language">${locale.toUpperCase()}</button><div class="language-menu" role="menu">${global.LEFUSIL_SITE_CONFIG.supportedLocales.map(code=>`<button type="button" role="menuitem" data-locale="${code}" aria-current="${code===locale}">${code.toUpperCase()} · ${global.LEFUSIL_SITE_CONFIG.localeLabels[code]}</button>`).join('')}</div></div>`}
+  function switcher(){return`<div class="language-switcher"><button class="language-toggle" type="button" aria-expanded="false" aria-label="Select language">${locale.toUpperCase()}</button><div class="language-menu" role="menu">${global.LEFUSIL_SITE_CONFIG.supportedLocales.map(code=>`<button type="button" role="menuitem" data-locale="${code}" aria-current="${code===locale}">${code.toUpperCase()}</button>`).join('')}</div></div>`}
   function enhance(){
     document.querySelectorAll('[data-ar]').forEach(node=>node.outerHTML=switcher());
     const appointmentActive=location.pathname.endsWith('appointment.html');

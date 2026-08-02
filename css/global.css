@@ -145,3 +145,17 @@ body .legal-draft{border-inline-start-color:var(--color-brand-brass)}
 @media(hover:hover) and (pointer:fine){.header .nav-links a:hover{color:var(--color-brand-brass-hover)}.header .header-cta:hover,.btn:hover{border-color:var(--color-brand-brass-hover);background:var(--color-brand-brass-hover);color:var(--color-bg-dark)}.btn-outline:hover{border-color:var(--color-brand-brass);background:transparent;color:var(--color-brand-brass-hover)}.btn-dark:hover,.product-card .card-primary:hover,.product-page .product-action-primary:hover{border-color:#2a2e27;background:#2a2e27;color:var(--color-text-light)}.product-card .card-secondary:hover{color:var(--color-brand-brass)}.footer a:hover{color:var(--color-text-light)}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
 @media(forced-colors:active){:where(a,button,input,select,textarea,[tabindex]):focus-visible{outline:2px solid Highlight}.btn,.availability{border:1px solid ButtonText}}
+
+/* Compact global-header language switcher. */
+.header .language-switcher{position:relative;display:flex;min-width:44px;min-height:44px;align-items:center;justify-content:center;align-self:center}
+.header .language-toggle{position:relative;display:inline-flex;width:auto;min-width:44px;height:44px;align-items:center;justify-content:center;gap:7px;padding:0 5px;border:0;border-bottom:1px solid rgba(246,242,234,.32);background:transparent;color:var(--color-text-light);font-size:.66rem;font-weight:700;letter-spacing:.12em;line-height:1;transition:color 200ms ease-out,border-color 200ms ease-out}
+.header .language-toggle:after{width:6px;height:6px;margin-top:-3px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;content:"";transform:rotate(45deg);transition:transform 200ms ease-out}
+.header .language-toggle[aria-expanded=true]{border-bottom-color:var(--color-brand-brass);color:var(--color-brand-brass-hover)}
+.header .language-toggle[aria-expanded=true]:after{margin-top:3px;transform:rotate(225deg)}
+.header .language-menu{position:absolute;z-index:120;inset:auto;inset-block-start:calc(100% + 8px);inset-inline-end:0;display:none;min-width:92px;padding:6px;border:1px solid var(--color-border-brass);background:var(--color-bg-dark);box-shadow:0 14px 32px rgba(0,0,0,.24)}
+.header .language-menu.open{display:grid}
+.header .language-menu button{position:relative;min-width:0;min-height:40px;padding:8px 13px 8px 24px;border:0;background:transparent;color:var(--color-text-muted-light);font-size:.67rem;font-weight:700;letter-spacing:.14em;text-align:left}
+.header .language-menu button[aria-current=true]{color:var(--color-text-light)}
+.header .language-menu button[aria-current=true]:before{position:absolute;left:10px;top:50%;width:5px;height:5px;border-radius:50%;background:var(--color-brand-brass);content:"";transform:translateY(-50%)}
+.header .language-menu button:focus-visible{color:var(--color-brand-brass-hover);outline:2px solid var(--color-brand-brass-hover);outline-offset:-2px}
+@media(hover:hover) and (pointer:fine){.header .language-toggle:hover{border-bottom-color:var(--color-brand-brass);color:var(--color-brand-brass-hover)}.header .language-menu button:hover{background:var(--color-surface-dark);color:var(--color-brand-brass-hover)}}
