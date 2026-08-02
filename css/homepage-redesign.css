@@ -83,3 +83,8 @@ body.home-page .heritage-hero h1 span{color:#ddd5ca}
   .heritage-hero .actions{margin-top:30px}
   .makers-line{margin-top:28px}
 }
+
+@media(max-width:800px){
+  .home-page .signature-section{padding-top:0}
+  .home-page .signature-section .signature-heading{display:none;margin:0}
+}
