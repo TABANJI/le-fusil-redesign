@@ -38,3 +38,26 @@ html[dir="rtl"] .heritage-hero-overlay,html[dir="rtl"] .final-cta-overlay{transf
 html[dir="rtl"] .house-link b{right:auto;left:clamp(18px,3vw,42px);transform:scaleX(-1)}html[dir="rtl"] .house-link:hover b{transform:scaleX(-1) translateX(4px)}html[dir="rtl"] .house-link span{direction:ltr;text-align:right}html[dir="rtl"] .houses-all-link span{transform:scaleX(-1)}
 @media(prefers-reduced-motion:reduce){.house-link,.house-link b,.houses-all-link span{transition:none!important}.house-link:hover{transform:none}}
 @media(prefers-reduced-motion:reduce){.category-editorial>img{transition:none!important}}
+
+/* Mobile editorial overlays; desktop compositions remain unchanged. */
+@media(max-width:800px){
+  .showroom-editorial{position:relative;display:grid;min-height:clamp(660px,165vw,720px);grid-template-columns:1fr;overflow:hidden}
+  .showroom-editorial-media,.showroom-editorial-copy{grid-area:1/1;min-width:0}
+  .showroom-editorial-media{min-height:100%;aspect-ratio:auto}
+  .showroom-editorial-media:after{z-index:1;background:linear-gradient(180deg,rgba(10,12,9,.06) 18%,rgba(10,12,9,.46) 50%,rgba(10,12,9,.97) 88%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+  .showroom-editorial-media figcaption{inset:18px 18px auto auto;max-width:calc(100% - 36px)}
+  .showroom-editorial-copy{position:relative;z-index:2;align-self:end;padding:180px 24px 36px;background:transparent}
+  .showroom-editorial-copy h2{font-size:clamp(2.4rem,11vw,3.15rem)}
+  .showroom-editorial-copy p{font-size:.95rem;line-height:1.7}
+  .showroom-editorial-copy .editorial-actions{display:grid;width:100%;gap:12px;margin-top:28px}
+  .showroom-editorial-copy .editorial-actions .btn,.showroom-editorial-copy .editorial-actions .editorial-link{width:100%;min-height:52px;justify-content:center}
+  .collection-editorial{padding-block:60px!important}
+  .collection-editorial-frame{display:grid;min-height:clamp(570px,150vw,650px);grid-template-columns:1fr;overflow:hidden}
+  .collection-editorial-image,.collection-editorial-copy{grid-area:1/1;min-width:0}
+  .collection-editorial-image{min-height:100%;aspect-ratio:auto}
+  .collection-editorial-image:after{z-index:1;background:linear-gradient(180deg,rgba(10,12,9,.04) 20%,rgba(10,12,9,.46) 53%,rgba(10,12,9,.96) 100%)}
+  .collection-editorial-copy{position:relative;z-index:2;align-self:end;padding:150px 24px 34px;background:transparent}
+  .collection-editorial-copy h2{font-size:clamp(2.35rem,10.5vw,3.1rem)}
+  .collection-editorial-copy p{font-size:.95rem;line-height:1.65}
+  .collection-editorial-copy .editorial-link{min-height:48px;margin-top:24px;align-items:center}
+}
