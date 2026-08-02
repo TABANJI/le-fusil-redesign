@@ -62,10 +62,11 @@
     <nav class="collection-browse" aria-label="Browse the collection"><div class="collection-container"><span>Browse by Maker</span><div id="makerLinks"></div><span>Browse by Category</span><div id="categoryLinks"></div></div></nav>
     <section class="collection-main" id="collectionGrid">
       <div class="collection-container catalog-layout">
-        <aside class="filters" id="filters" aria-hidden="false">
-          <div class="filter-drawer-head"><h2>Filters</h2><button type="button" id="closeFilters" aria-label="Close filters"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+        <button type="button" class="filter-drawer-overlay" id="filterOverlay" aria-label="Close filters" tabindex="-1" hidden></button>
+        <aside class="filters" id="filters" aria-hidden="false" aria-labelledby="filterDrawerTitle">
+          <div class="filter-drawer-head"><h2 id="filterDrawerTitle">Filters <span class="filter-drawer-selection" id="drawerSelectedCount" aria-live="polite"></span></h2><button type="button" id="closeFilters" aria-label="Close filters"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
           <form id="filterForm"><div id="filterGroups"></div></form>
-          <div class="filter-drawer-footer"><button type="button" class="filter-clear" id="drawerClear">Clear</button><button type="button" class="filter-apply" id="applyFilters">Show <span id="draftCount">0</span> Pieces</button></div>
+          <div class="filter-drawer-footer"><button type="button" class="filter-clear" id="drawerClear">Clear All</button><button type="button" class="filter-apply" id="applyFilters" aria-live="polite">Show 0 Pieces</button></div>
         </aside>
         <div class="catalog-results">
           <div class="active-filters" id="activeFilters" aria-label="Active filters" hidden></div>
