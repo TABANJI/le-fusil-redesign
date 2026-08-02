@@ -87,33 +87,42 @@ body.home-page .heritage-hero h1 span{color:#ddd5ca}
 @media(max-width:800px){
   .home-page .signature-section{padding-top:0;background:#141612}
   .home-page .signature-section .signature-heading{display:none;margin:0}
-  .home-page .signature-section .products-grid{padding-top:24px;row-gap:32px}
-  .home-page .signature-section .products-grid:before{width:max-content;grid-column:1/-1;margin:0 auto -12px;padding-bottom:9px;border-bottom:1px solid rgba(169,131,69,.3);color:var(--color-bronze);content:"SELECTED PIECES";font-size:11px;font-weight:600;letter-spacing:.22em;line-height:1;text-align:center}
+  .home-page .signature-section .products-grid{padding-top:46px;row-gap:32px}
+  .home-page .signature-section .products-grid:before{width:max-content;min-width:180px;grid-column:1/-1;margin:0 auto -12px;padding-bottom:9px;border-bottom:1px solid rgba(169,131,69,.45);color:var(--color-bronze);content:"SELECTED PIECES";font-size:11px;font-weight:600;letter-spacing:.3em;line-height:1;text-align:center}
   .home-page .signature-section .product-card{border:1px solid rgba(181,145,82,.18)}
-  .home-page .signature-section .product-image{aspect-ratio:1.21;border:0}
+  .home-page .signature-section .product-image{aspect-ratio:1.14;border:0}
   .home-page .signature-section .product-image img{filter:brightness(.95) contrast(1.05) saturate(1.04) sepia(.03)}
   .home-page .signature-section .product-info{padding-bottom:12px}
   .home-page .signature-section .product-buyline{gap:20px}
+  .home-page .signature-section .price{font-size:calc(1.3rem + 2px);font-weight:500}
   .home-page .signature-section .availability-request{min-height:24px;padding-inline:8px;border-color:rgba(91,89,81,.14);font-size:.55rem}
   .home-page .signature-section .card-actions{gap:14px;margin-top:28px}
-  .home-page .signature-section .card-primary{min-height:48px;padding-block:0}
+  .home-page .signature-section .card-primary{min-height:48px;padding-block:0;box-shadow:0 10px 24px rgba(0,0,0,.18)}
+  .home-page .signature-section .card-secondary{padding-inline-end:10px;border-color:rgba(169,131,69,.55)}
+  .home-page .signature-section .card-secondary span{margin-inline-start:9px}
 }
 
 @media(max-width:800px){
   .home-page .curated-categories{padding-block:56px}
   .home-page .curated-categories .editorial-heading{margin-bottom:28px}
-  .home-page .curated-categories .category-shade{background:linear-gradient(180deg,rgba(13,15,11,.12) 10%,rgba(13,15,11,.34) 52%,rgba(13,15,11,.94) 100%)}
+  .home-page .curated-categories .category-shade{background:linear-gradient(180deg,rgba(13,15,11,.07) 10%,rgba(13,15,11,.29) 52%,rgba(13,15,11,.89) 100%)}
   .home-page .showroom-editorial-copy .editorial-actions{margin-top:40px}
+  .home-page .showroom-editorial-copy .editorial-actions .btn{min-height:60px;padding-block:4px}
   .home-page .collection-editorial-copy{padding-bottom:18px}
   .home-page .benefits-block{padding-block:58px}
   .home-page .benefits-heading{margin-bottom:26px}
   .home-page .benefits-grid article{padding:25px 22px}
   .home-page .benefits-grid span{font-size:1.35rem}
+  .home-page .benefits-grid h3{margin-top:32px}
   .home-page .final-cta-overlay{background:linear-gradient(180deg,rgba(11,13,10,.28),rgba(11,13,10,.89))}
   .home-page .footer{padding-top:38px}
   .home-page .footer-lead{padding:42px 0 32px}
   .home-page .footer-grid{row-gap:18px;column-gap:24px;padding-top:32px}
   .home-page .footer-grid>div{padding-bottom:20px}
   .home-page .footer h3,.home-page .footer h4{margin-bottom:12px}
+  .home-page .footer-brand h3{font-size:1.75rem}
+  .home-page .footer h4{color:color-mix(in srgb,var(--color-brand-brass) 90%,var(--color-text-light))}
+  .home-page .footer a{color:color-mix(in srgb,var(--color-text-muted-light) 88%,var(--color-text-light))}
   .home-page .footer-bottom{margin-top:26px;padding-block:18px}
+  .home-page .shortlist-count{min-width:15px;height:15px;padding-inline:3px;border-radius:8px}
 }
