@@ -92,6 +92,7 @@ body.home-page .heritage-hero h1 span{color:#ddd5ca}
   .home-page .signature-section .product-card{border:1px solid rgba(181,145,82,.18)}
   .home-page .signature-section .product-image{aspect-ratio:1.21;border:0}
   .home-page .signature-section .product-image img{filter:brightness(.95) contrast(1.05) saturate(1.04) sepia(.03)}
+  .home-page .signature-section .product-info{padding-bottom:12px}
   .home-page .signature-section .product-buyline{gap:20px}
   .home-page .signature-section .availability-request{min-height:24px;padding-inline:8px;border-color:rgba(91,89,81,.14);font-size:.55rem}
   .home-page .signature-section .card-actions{gap:14px;margin-top:28px}
