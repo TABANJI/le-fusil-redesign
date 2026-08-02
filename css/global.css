@@ -159,3 +159,8 @@ body .legal-draft{border-inline-start-color:var(--color-brand-brass)}
 .header .language-menu button[aria-current=true]:before{position:absolute;left:10px;top:50%;width:5px;height:5px;border-radius:50%;background:var(--color-brand-brass);content:"";transform:translateY(-50%)}
 .header .language-menu button:focus-visible{color:var(--color-brand-brass-hover);outline:2px solid var(--color-brand-brass-hover);outline-offset:-2px}
 @media(hover:hover) and (pointer:fine){.header .language-toggle:hover{border-color:var(--color-brand-brass);background:rgba(10,12,9,.22);color:var(--color-text-light)}.header .language-menu button:hover{background:var(--color-surface-dark);color:var(--color-brand-brass-hover)}}
+
+@media(max-width:800px){
+  .header .language-switcher{display:none}
+  .header .header-actions{gap:0}
+}

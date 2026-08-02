@@ -70,3 +70,15 @@ html[dir="rtl"] .house-link b{right:auto;left:clamp(18px,3vw,42px);transform:sca
 
 body.home-page .heritage-hero h1{color:#f4efe6}
 body.home-page .heritage-hero h1 span{color:#ddd5ca}
+
+@media(max-width:800px){
+  .heritage-hero{min-height:clamp(980px,250vw,1060px)}
+  .heritage-hero-media img{object-fit:cover;object-position:50% 45%}
+  .heritage-hero-copy{padding:calc(105px + env(safe-area-inset-top)) 22px 34px}
+  .heritage-hero-copy .eyebrow{margin-bottom:24px}
+  .heritage-hero h1{font-size:clamp(2rem,8.2vw,3.7rem);line-height:1.08}
+  .heritage-hero h1 span{margin-top:.18em}
+  .heritage-hero-copy>p{margin-top:28px}
+  .heritage-hero .actions{margin-top:30px}
+  .makers-line{margin-top:28px}
+}
