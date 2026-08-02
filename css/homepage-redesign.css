@@ -72,9 +72,10 @@ body.home-page .heritage-hero h1{color:#f4efe6}
 body.home-page .heritage-hero h1 span{color:#ddd5ca}
 
 @media(max-width:800px){
-  .heritage-hero{min-height:clamp(980px,250vw,1060px)}
-  .heritage-hero-media img{object-fit:cover;object-position:50% 45%}
-  .heritage-hero-copy{padding:calc(105px + env(safe-area-inset-top)) 22px 34px}
+  .heritage-hero{height:auto;min-height:0}
+  .heritage-hero-media img{object-fit:cover;object-position:55% 44%;transform:scale(1.12)}
+  .heritage-hero-overlay{background:radial-gradient(circle at 72% 40%,rgba(105,96,81,.12),transparent 34%),linear-gradient(90deg,rgba(8,10,8,.78) 0%,rgba(8,10,8,.48) 48%,rgba(8,10,8,.2) 100%),linear-gradient(180deg,rgba(8,10,8,.28) 0%,rgba(8,10,8,.18) 32%,rgba(8,10,8,.48) 64%,rgba(8,10,8,.76) 100%)}
+  .heritage-hero-copy{padding:calc(105px + env(safe-area-inset-top)) 22px 40px}
   .heritage-hero-copy .eyebrow{margin-bottom:24px}
   .heritage-hero h1{font-size:clamp(2rem,8.2vw,3.7rem);line-height:1.08}
   .heritage-hero h1 span{margin-top:.18em}
