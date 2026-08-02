@@ -117,8 +117,10 @@ body.home-page .heritage-hero h1 span{color:#ddd5ca}
   .home-page .final-cta-overlay{background:linear-gradient(180deg,rgba(11,13,10,.28),rgba(11,13,10,.89))}
   .home-page .footer{padding-top:38px}
   .home-page .footer-lead{padding:42px 0 32px}
-  .home-page .footer-grid{row-gap:18px;column-gap:24px;padding-top:32px}
-  .home-page .footer-grid>div{padding-bottom:20px}
+  .home-page .footer-lead .btn{display:flex;width:100%;align-items:center;justify-content:center;padding-block:0;line-height:1.2}
+  .home-page .footer-grid{align-items:start;row-gap:18px;column-gap:24px;padding-top:32px}
+  .home-page .footer-grid>div{align-self:start;padding-bottom:20px}
+  .home-page .footer-grid>div:nth-child(4){margin-top:0}
   .home-page .footer h3,.home-page .footer h4{margin-bottom:12px}
   .home-page .footer-brand h3{font-size:1.75rem}
   .home-page .footer h4{color:color-mix(in srgb,var(--color-brand-brass) 90%,var(--color-text-light))}
