@@ -98,3 +98,22 @@ body.home-page .heritage-hero h1 span{color:#ddd5ca}
   .home-page .signature-section .card-actions{gap:14px;margin-top:28px}
   .home-page .signature-section .card-primary{min-height:48px;padding-block:0}
 }
+
+@media(max-width:800px){
+  .home-page .curated-categories{padding-block:56px}
+  .home-page .curated-categories .editorial-heading{margin-bottom:28px}
+  .home-page .curated-categories .category-shade{background:linear-gradient(180deg,rgba(13,15,11,.12) 10%,rgba(13,15,11,.34) 52%,rgba(13,15,11,.94) 100%)}
+  .home-page .showroom-editorial-copy .editorial-actions{margin-top:40px}
+  .home-page .collection-editorial-copy{padding-bottom:18px}
+  .home-page .benefits-block{padding-block:58px}
+  .home-page .benefits-heading{margin-bottom:26px}
+  .home-page .benefits-grid article{padding:25px 22px}
+  .home-page .benefits-grid span{font-size:1.35rem}
+  .home-page .final-cta-overlay{background:linear-gradient(180deg,rgba(11,13,10,.28),rgba(11,13,10,.89))}
+  .home-page .footer{padding-top:38px}
+  .home-page .footer-lead{padding:42px 0 32px}
+  .home-page .footer-grid{row-gap:18px;column-gap:24px;padding-top:32px}
+  .home-page .footer-grid>div{padding-bottom:20px}
+  .home-page .footer h3,.home-page .footer h4{margin-bottom:12px}
+  .home-page .footer-bottom{margin-top:26px;padding-block:18px}
+}
