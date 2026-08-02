@@ -67,3 +67,6 @@ html[dir="rtl"] .house-link b{right:auto;left:clamp(18px,3vw,42px);transform:sca
   .heritage-hero h1 br{display:none}
   .heritage-hero h1 span{display:block}
 }
+
+body.home-page .heritage-hero h1{color:#f4efe6}
+body.home-page .heritage-hero h1 span{color:#ddd5ca}
