@@ -10,21 +10,25 @@ html[dir="rtl"] .collection-hero-texture{transform:scaleX(-1)}html[dir="rtl"] .c
   .shop-page .collection-hero{min-height:0;border-bottom:1px solid rgba(169,131,69,.24)}
   .shop-page .collection-hero-media img{object-position:62% 44%}
   .shop-page .collection-hero-texture{background:linear-gradient(90deg,rgba(10,12,9,.89),rgba(10,12,9,.7) 46%,rgba(10,12,9,.14)),linear-gradient(180deg,rgba(8,9,7,.2),transparent 48%,rgba(8,9,7,.66))}
-  .shop-page .collection-hero-content{padding:82px 0 20px}
+  .shop-page .collection-hero-content{padding:82px 0 16px}
   .shop-page .collection-breadcrumb{margin-bottom:14px;padding-block:2px;font-size:.59rem;letter-spacing:.08em;line-height:1.2}
   .shop-page .collection-hero .eyebrow{margin-bottom:0}
-  .shop-page .collection-hero h1{max-width:100%;margin:10px 0 16px;font-size:clamp(2.65rem,10.5vw,3.9rem);line-height:.94;letter-spacing:-.045em;text-wrap:balance}
-  .shop-page .collection-hero p{max-width:34rem;margin:0;font-size:.92rem;line-height:1.55}
-  .shop-page .collection-hero-actions{display:grid;gap:10px;margin-top:22px}
+  .shop-page .collection-hero h1{max-width:100%;margin:10px 0 16px;font-size:clamp(2.52rem,10vw,3.7rem);line-height:.97;letter-spacing:-.045em;text-wrap:balance}
+  .shop-page .collection-hero p{max-width:93%;margin:0;font-size:.89rem;line-height:1.52}
+  .shop-page .collection-hero-actions{display:grid;gap:8px;margin-top:14px}
   .shop-page .collection-hero-actions .btn{display:flex;width:100%;min-height:52px;align-items:center;justify-content:center;line-height:1.2}
-  .shop-page .collection-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 16px;margin-top:22px;padding-top:13px;border-top-color:rgba(255,255,255,.18)}
-  .shop-page .collection-stats span{min-width:0;margin:0;padding:0;color:#bdb8ae;font-size:.61rem;letter-spacing:.075em;line-height:1.35}
-  .shop-page .collection-stats span:nth-child(-n+2){display:flex;align-items:baseline;gap:6px}
-  .shop-page .collection-stats strong{font-size:1.08rem;line-height:1}
+  .shop-page .collection-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 16px;margin-top:20px;padding-top:12px;border-top-color:rgba(255,255,255,.18)}
+  .shop-page .collection-stats span{min-width:0;margin:0;padding:0;color:#bdb8ae;font-size:.59rem;letter-spacing:.07em;line-height:1.2}
+  .shop-page .collection-stats span:nth-child(-n+2){display:flex;align-items:baseline;gap:4px}
+  .shop-page .collection-stats strong{font-size:1.08rem;line-height:1.2}
   .shop-page .collection-stats span:nth-child(3),.shop-page .collection-stats span:nth-child(4){grid-column:1/-1}
-  .shop-page .collection-stats span:nth-child(3){margin-top:2px}
-  .shop-page .collection-stats span:nth-child(4){font-size:.57rem;letter-spacing:.06em;line-height:1.4}
+  .shop-page .collection-stats span:nth-child(3){margin-top:5px}
+  .shop-page .collection-stats span:nth-child(4){max-width:30rem;font-size:.54rem;letter-spacing:.045em;line-height:1.4}
   .shop-page .collection-toolbar{margin-top:0}
+  .shop-page .toolbar-inner{align-items:start}
+  .shop-page .toolbar-summary,.shop-page .sort-control{align-self:start}
+  .shop-page .sort-control{min-height:44px;align-items:flex-start}
+  .shop-page .sort-control select{height:24px}
 }
 
 @media(max-width:600px){
