@@ -85,9 +85,6 @@ body.home-page .heritage-hero h1 span{color:#ddd5ca}
 }
 
 @media(max-width:800px){
-  .home-page .signature-section{padding-top:0}
-  .home-page .signature-section:before{display:block;height:68px;background:linear-gradient(to bottom,#141812 0%,#24251d 34%,#8c8675 68%,#eee7dc 100%);content:""}
+  .home-page .signature-section{padding-top:0;background:#141812}
   .home-page .signature-section .signature-heading{display:none;margin:0}
-  .home-page .signature-section .products-grid{position:relative;z-index:1;margin-top:-22px}
-  .home-page .signature-section .product-card:first-child{box-shadow:0 12px 30px rgba(18,14,9,.1)}
 }
