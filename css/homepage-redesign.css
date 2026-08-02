@@ -87,5 +87,6 @@ body.home-page .heritage-hero h1 span{color:#ddd5ca}
 @media(max-width:800px){
   .home-page .signature-section{padding-top:0;background:#141612}
   .home-page .signature-section .signature-heading{display:none;margin:0}
-  .home-page .signature-section .products-grid{row-gap:32px}
+  .home-page .signature-section .products-grid{padding-top:24px;row-gap:32px}
+  .home-page .signature-section .products-grid:before{width:max-content;grid-column:1/-1;margin:0 auto -12px;padding-bottom:9px;border-bottom:1px solid rgba(169,131,69,.3);color:var(--color-bronze);content:"SELECTED PIECES";font-size:11px;font-weight:600;letter-spacing:.22em;line-height:1;text-align:center}
 }
