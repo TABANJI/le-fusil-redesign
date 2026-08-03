@@ -21,21 +21,21 @@ html[dir="rtl"] .spec-value{text-align:right}html[dir="rtl"] .product-desktop-st
 
 @media(max-width:768px){
   .product-page{padding-bottom:0}
-  .product-shell{width:min(calc(100% - 40px),1500px);padding:92px 0 0}
+  .product-shell{width:min(calc(100% - 40px),1500px);padding:calc(78px + env(safe-area-inset-top)) 0 0}
   .product-breadcrumbs{gap:7px;margin-bottom:14px;white-space:nowrap}
   .product-heritage-label{margin:0 0 10px;font-size:.62rem}
   .info-intro .product-brand{margin-bottom:8px}
   .product-title{max-width:100%;font-size:clamp(2.55rem,11vw,3.85rem);line-height:.98;overflow-wrap:normal;text-wrap:balance}
   .product-category{margin-top:12px}
-  .product-status-row{gap:8px;margin-top:12px;padding-bottom:16px}
-  .product-gallery{margin-top:16px}
+  .product-status-row{gap:8px;margin-top:12px;padding-bottom:10px}
+  .product-gallery{margin-top:8px}
   .gallery-main{box-shadow:none;background:#e6ded2}
   .gallery-main img{padding:12px;object-fit:contain}
   .fullscreen-button{right:10px;bottom:10px;min-height:44px;padding-inline:11px;font-size:.56rem}
   .gallery-thumbs{gap:8px;margin-top:10px;padding-bottom:4px}
   .gallery-thumb{flex-basis:72px;min-height:72px;border-color:transparent}
   .gallery-thumb[aria-selected=true]{border-color:var(--lux-bronze);box-shadow:inset 0 -1px var(--lux-bronze)}
-  .product-purchase{padding-top:16px}
+  .product-purchase{padding-top:28px}
   .product-price{margin-bottom:12px;font-size:1.5rem}
   .product-summary{font-size:.96rem;line-height:1.62}
   .product-actions{gap:8px;margin-top:18px}
@@ -46,7 +46,9 @@ html[dir="rtl"] .spec-value{text-align:right}html[dir="rtl"] .product-desktop-st
   .product-service-note{margin-top:12px;padding:10px 0}
   .product-section{padding:40px 0}
   .product-shell>.product-section:last-child{padding-bottom:64px}
-  .story-layout{gap:12px;padding-block:40px}
+  .story-layout{gap:22px;padding:32px 0 24px;border-top:0}
+  .story-layout+.product-section{padding-top:16px;padding-bottom:28px}
+  .story-layout+.product-section+.product-section{padding-top:32px}
   .section-heading{margin-bottom:20px}
   .story-mark{max-width:none;padding-left:18px}
   .story-content h2,.section-heading h2{max-width:100%;font-size:clamp(2.35rem,10vw,3.5rem);line-height:1;overflow-wrap:anywhere}
@@ -57,6 +59,7 @@ html[dir="rtl"] .spec-value{text-align:right}html[dir="rtl"] .product-desktop-st
   .feature-icon svg{width:22px;height:22px}
   .feature-item h3{margin:0;font-size:1.18rem;line-height:1.2}
   .feature-item p{max-width:30rem;line-height:1.48}
+  .feature-item:last-child{border-bottom:0}
   .spec-row{grid-template-columns:minmax(112px,.68fr) minmax(0,1.32fr);align-items:baseline;gap:16px;padding:10px 0}
   .spec-label{color:#8b867d;font-size:.61rem;line-height:1.45}
   .spec-value{color:#242520;font-size:1rem;font-weight:500;line-height:1.4}
@@ -67,6 +70,7 @@ html[dir="rtl"] .spec-value{text-align:right}html[dir="rtl"] .product-desktop-st
   .image-story-figure:first-child{grid-column:1/-1}
   .image-story-figure img,.image-story-figure:first-child img{aspect-ratio:4/3;object-fit:cover}
   .image-story-figure:nth-child(n+2){width:72%;justify-self:end}
+  .image-story-figure:nth-child(2){justify-self:center}
   .image-story-figure:nth-child(odd):not(:first-child){justify-self:start}
   .image-story-figure:nth-child(n+2) img{aspect-ratio:3/4}
   .compliance-section .section-heading h2{font-size:clamp(2.45rem,11vw,3.65rem)}
