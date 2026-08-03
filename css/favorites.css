@@ -46,7 +46,7 @@
   .favorites-page .footer-grid>div:nth-child(n+2){padding-top:0;border-top:0}
 }
 @media(max-width:767px){
-  .favorites-page .shortlist-count{top:-5px;right:-5px;min-width:28px;height:28px;padding-inline:7px;place-items:center;border-radius:999px;font-size:.65rem;font-weight:800;line-height:1;transition:transform 200ms ease-out,opacity 200ms ease-out}
+  .favorites-page .shortlist-count{top:0;right:0;min-width:19px;height:19px;padding-inline:5px;place-items:center;border-radius:999px;font-size:.6rem;font-weight:800;line-height:1;transition:transform 200ms ease-out,opacity 200ms ease-out}
   .favorites-page .legal-strip,.favorites-page .footer{position:relative;z-index:51}
   .favorites-page .legal-strip{margin-top:18px;border-top:1px solid rgba(184,148,82,.14);border-bottom:1px solid rgba(184,148,82,.12);background:#141611}
   .favorites-page .footer{padding:18px 0 calc(20px + env(safe-area-inset-bottom))}
