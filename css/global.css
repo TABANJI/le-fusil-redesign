@@ -26,7 +26,7 @@
 .header-actions{display:flex;align-items:center;gap:5px}
 .header-actions svg,.mobile-menu svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round}
 .header-actions .icon-btn{position:relative;border:1px solid transparent}
-.shortlist-count{position:absolute;top:2px;right:1px;display:grid;min-width:17px;height:17px;padding:0 4px;place-items:center;border-radius:9px;background:var(--accent);color:#fff;font-size:.55rem;font-weight:700;line-height:1}
+.shortlist-count{position:absolute;top:1px;right:1px;display:grid;min-width:19px;height:19px;padding:0 4px;place-items:center;border-radius:999px;background:var(--accent);box-shadow:0 2px 7px rgba(0,0,0,.2);color:#fff;font-size:.55rem;font-weight:700;line-height:1}
 .header-cta{min-height:44px;margin-left:10px;padding:0 19px;font-size:.65rem}
 .hamb svg{width:23px;height:23px}
 .footer{padding:0 0 28px;background:#171815}
