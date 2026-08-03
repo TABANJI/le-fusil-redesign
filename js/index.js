@@ -19,6 +19,7 @@
   if(categoryGrid){categoryGrid.innerHTML=categories.map(([category,count],index)=>`<article class="category-editorial reveal"><img src="${images[category]||'assets/images/showroom/optimized/le-fusil-collection-wall-640.webp'}" alt="" loading="lazy" decoding="async"><span class="category-shade" aria-hidden="true"></span><div class="category-content"><span class="category-number">${String(index+1).padStart(2,'0')}</span><div class="category-count">${count} ${count===1?'piece':'pieces'}</div><h3>${category}</h3><p>${descriptions[category]||'Explore the current selection with personal showroom guidance.'}</p><a href="shop.html?category=${encodeURIComponent(category)}">Explore Collection <span aria-hidden="true">→</span></a></div></article>`).join('')}
   const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');revealObserver.unobserve(entry.target)}}),{threshold:.08});
   document.querySelectorAll('#brandGrid .reveal,#categoryGrid .reveal').forEach(element=>revealObserver.observe(element));
+  const privateViewingCta=document.querySelector('.footer-lead .btn');if(privateViewingCta)privateViewingCta.href='appointment.html';
 })();
 function money(p){return Number(p.price)>0?new Intl.NumberFormat('en-US',{style:'currency',currency:p.currency||'USD',maximumFractionDigits:0}).format(Number(p.price)):'Price on request'}
 function productCard(p){
