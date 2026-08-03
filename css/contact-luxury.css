@@ -56,7 +56,7 @@ body.contact-page{overflow-x:hidden}
 .contact-page .form-status{margin-top:14px}
 .contact-page .form-success{padding:38px 24px}
 .contact-page .success-actions{display:grid}
-.contact-page .footer{padding-top:36px;padding-bottom:calc(18px + env(safe-area-inset-bottom))}
+.contact-page .footer{padding-top:22px;padding-bottom:calc(6px + env(safe-area-inset-bottom))}
 .contact-page .footer>.container{width:min(calc(100% - 48px),var(--max))}
 .contact-page .footer-lead{display:flex;gap:36px;padding:32px 0 40px;border-bottom-color:rgba(184,148,82,.18)}
 .contact-page .footer-lead h2{margin:20px 0 0;font-size:clamp(2.1rem,8.4vw,2.42rem);line-height:1;text-wrap:balance}
