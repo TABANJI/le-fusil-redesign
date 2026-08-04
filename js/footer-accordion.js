@@ -27,5 +27,6 @@
     mobile.addEventListener?.('change',()=>sync(grid));
     addEventListener('pageshow',()=>sync(grid));
   };
-  init();
+  if(document.readyState==='complete')init();
+  else addEventListener('DOMContentLoaded',init,{once:true});
 })();

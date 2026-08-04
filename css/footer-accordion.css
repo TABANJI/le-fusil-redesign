@@ -12,9 +12,12 @@
   .product-footer-group>summary:after{position:absolute;right:2px;content:"+";color:var(--color-text-muted-light);font-size:1rem;font-weight:400}
   .product-footer-group[open]>summary:after{content:"−"}
   .product-footer-links{padding:0 0 16px}
-  .product-footer-group[open] .product-footer-links{animation:product-footer-open 180ms ease-out}
   .product-footer-links a,.product-footer-links .footer-text-button{margin:0 0 12px;line-height:1.4}
   :is(.product-page,.favorites-page) .footer-bottom{margin-top:16px;padding-top:14px}
 }
 
-@keyframes product-footer-open{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@supports selector(details::details-content){
+  .product-footer-group{interpolate-size:allow-keywords}
+  .product-footer-group::details-content{block-size:0;overflow-y:clip;opacity:0;transition:block-size 180ms ease-out,content-visibility 180ms allow-discrete,opacity 180ms ease-out}
+  .product-footer-group[open]::details-content{block-size:auto;opacity:1}
+}
