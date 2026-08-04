@@ -111,3 +111,23 @@ html[dir="rtl"] .spec-value{text-align:right}html[dir="rtl"] .product-desktop-st
   .spec-row{grid-template-columns:1fr;gap:4px}
   .spec-value{text-align:left}
 }
+
+/* Selected Alternatives card rhythm. */
+.related-products .product-info{padding-top:32px}
+.related-products .product-info h3{min-height:2.24em;margin:10px 0 16px;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+.related-products .product-buyline{min-height:30px;align-items:center;gap:12px}
+.related-products .availability{min-height:30px;padding-inline:10px}
+.related-products .card-actions{margin-top:18px}
+.related-products .card-primary{min-height:48px;padding-block:0}
+
+@media(hover:hover) and (pointer:fine){
+  .related-products .product-card:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(26,25,21,.08);transition-duration:240ms}
+  .related-products .product-card:hover .product-image img{transform:none}
+}
+
+@media(max-width:768px){
+  .related-products .product-info{padding:22px 16px 18px}
+  .related-products .product-info h3{display:-webkit-box;min-height:2.24em;margin:9px 0 14px;overflow:hidden;font-size:1.45rem;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+  .related-products .product-buyline{min-height:30px}
+  .related-products .card-actions{margin-top:16px}
+}
