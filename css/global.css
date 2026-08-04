@@ -166,3 +166,4 @@ body .legal-draft{border-inline-start-color:var(--color-brand-brass)}
   .header .language-switcher{display:none}
   .header .header-actions{gap:0}
 }
+@media(max-width:768px){.footer .footer-grid .footer-text-button,.consent-banner .consent-actions .footer-text-button,.consent-panel .consent-actions .footer-text-button{display:flex;min-height:44px;align-items:center}}

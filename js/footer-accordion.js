@@ -27,5 +27,5 @@
     mobile.addEventListener?.('change',()=>sync(grid));
     addEventListener('pageshow',()=>sync(grid));
   };
-  setTimeout(init,0);
+  init();
 })();
