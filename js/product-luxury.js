@@ -21,24 +21,4 @@
   const sticky=document.createElement('aside');sticky.className='product-desktop-sticky';sticky.setAttribute('aria-label','Product quick actions');sticky.innerHTML=`<div class="sticky-summary"><strong>${product.brand} ${product.name}</strong><span>${price} · ${availability}</span></div><a class="product-action" href="appointment.html?product=${encodeURIComponent(product.slug)}">Book Viewing</a>`;document.body.append(sticky);
   const purchase=document.querySelector('.product-purchase');new IntersectionObserver(entries=>sticky.classList.toggle('visible',!entries[0].isIntersecting),{threshold:.05}).observe(purchase);
   mainImage?.addEventListener('load',()=>main.classList.remove('is-changing'));
-  setTimeout(()=>{
-    const grid=document.querySelector('.product-page .footer-grid');if(!grid)return;
-    [...grid.children].filter(group=>!group.classList.contains('footer-brand')).forEach((group,index)=>{
-      if(group.matches('details'))return;
-      const heading=group.querySelector('h4');if(!heading)return;
-      const details=document.createElement('details');details.className='product-footer-group';
-      const summary=document.createElement('summary');summary.textContent=heading.textContent;
-      const content=document.createElement('div');content.className='product-footer-links';content.id=`product-footer-panel-${index+1}`;
-      summary.setAttribute('aria-controls',content.id);summary.setAttribute('aria-expanded','false');
-      [...group.children].filter(child=>child!==heading).forEach(child=>content.appendChild(child));
-      details.addEventListener('toggle',()=>{
-        summary.setAttribute('aria-expanded',String(details.open));
-        if(details.open&&matchMedia('(max-width: 768px)').matches){
-          document.querySelectorAll('.product-footer-group[open]').forEach(openGroup=>{if(openGroup!==details)openGroup.open=false});
-        }
-      });
-      details.append(summary,content);group.replaceWith(details);
-    });
-    const mobile=matchMedia('(max-width: 768px)'),sync=()=>document.querySelectorAll('.product-footer-group').forEach(group=>{group.open=!mobile.matches;group.querySelector('summary')?.setAttribute('aria-expanded',String(group.open))});sync();mobile.addEventListener?.('change',sync);
-  },0);
 })();
