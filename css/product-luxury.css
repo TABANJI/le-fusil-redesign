@@ -23,6 +23,7 @@ html[dir="rtl"] .spec-value{text-align:right}html[dir="rtl"] .product-desktop-st
 @media(max-width:768px){
   .product-page{padding-bottom:0}
   .product-shell{width:min(calc(100% - 40px),1500px);padding:calc(78px + env(safe-area-inset-top)) 0 0}
+  .product-layout{gap:0}
   .product-breadcrumbs{gap:7px;margin-bottom:14px;white-space:nowrap}
   .product-heritage-label{margin:0 0 10px;font-size:.62rem}
   .info-intro .product-brand{margin-bottom:8px}
