@@ -31,5 +31,7 @@
 
   document.querySelector('#siteHeader').innerHTML=header;
   document.querySelector('#siteFooter').innerHTML=footer;
+  if(!document.querySelector('link[href*="footer-accordion.css"]'))document.head.insertAdjacentHTML('beforeend','<link rel="stylesheet" href="css/footer-accordion.css?v=20260804-3">');
+  addEventListener('DOMContentLoaded',()=>import('./footer-accordion.js?v=20260804-3'),{once:true});
   document.body.insertAdjacentHTML('beforeend',overlays);
 })();

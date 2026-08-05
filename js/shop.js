@@ -30,7 +30,7 @@
   const conditionCounts=uniqueCounts('condition');
   const originCounts=uniqueCounts('origin');
   const optionMarkup=(name,value,label,count)=>`<label class="filter-option"><input type="checkbox" name="${name}" value="${value}"><span class="custom-check" aria-hidden="true"></span><span>${label}</span>${count!==undefined?`<span class="filter-count">${count}</span>`:''}</label>`;
-  const groupMarkup=(id,title,content)=>`<section class="filter-group" data-filter-group="${id}"><button type="button" class="filter-heading" aria-expanded="true" aria-controls="filter-${id}"><span class="filter-heading-label">${title}<span class="filter-section-count" aria-label="0 selected" hidden></span></span>${icons.chevron}</button><div class="filter-options" id="filter-${id}">${content}</div></section>`;
+  const groupMarkup=(id,title,content)=>`<section class="filter-group" data-filter-group="${id}"><button type="button" class="filter-heading" data-accordion-trigger aria-expanded="false" aria-controls="filter-${id}"><span class="filter-heading-label">${title}<span class="filter-section-count" aria-label="0 selected" hidden></span></span>${icons.chevron}</button><div class="filter-options" id="filter-${id}">${content}</div></section>`;
   const availabilityCounts=products.reduce((map,item)=>(map[item.availabilityKey]=(map[item.availabilityKey]||0)+1,map),{});
   let groups='';
   if(categoryCounts.size)groups+=groupMarkup('category','Category',[...categoryCounts].map(([value,count])=>optionMarkup('category',value,value,count)).join(''));
@@ -41,8 +41,7 @@
   if(conditionCounts.size)groups+=groupMarkup('condition','Condition',[...conditionCounts].map(([value,count])=>optionMarkup('condition',value,value,count)).join(''));
   if(originCounts.size)groups+=groupMarkup('origin','Origin',[...originCounts].map(([value,count])=>optionMarkup('origin',value,value,count)).join(''));
   if(products.some(item=>item.featured))groups+=groupMarkup('signature','Signature Selection',optionMarkup('featured','true','Featured pieces',products.filter(item=>item.featured).length));
-  document.querySelector('#filterGroups').innerHTML=groups;
-  if(matchMedia('(max-width:800px)').matches)document.querySelectorAll('.filter-heading').forEach(button=>{const expanded=['filter-category','filter-brand'].includes(button.getAttribute('aria-controls'));button.setAttribute('aria-expanded',String(expanded));document.querySelector(`#${button.getAttribute('aria-controls')}`).hidden=!expanded});
+  const filterGroups=document.querySelector('#filterGroups');filterGroups.innerHTML=groups;filterGroups.dataset.accordionGroup='filters';document.querySelectorAll('.filter-heading').forEach((button,index)=>window.LEFUSIL_ACCORDION?.prepare(button,index===0));
 
   const selected=(key,value)=>state[key]?.some(item=>item.toLowerCase()===value.toLowerCase());
   function syncForm(source=state){
@@ -121,9 +120,6 @@
   function closeDrawer(apply=false){if(drawerHistoryActive&&!apply){history.back();return}hideDrawer(apply)}
   function openDrawer(){draft=copyState(state);syncForm(draft);updateDraftUi();const panel=document.querySelector('#filters'),overlay=document.querySelector('#filterOverlay');drawerReturnFocus=document.activeElement;panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');panel.classList.add('open');panel.setAttribute('aria-hidden','false');overlay.hidden=false;requestAnimationFrame(()=>overlay.classList.add('open'));document.querySelector('#openFilters').setAttribute('aria-expanded','true');document.body.classList.add('lock');history.pushState({...history.state,filterDrawer:true},'',location.href);drawerHistoryActive=true;setTimeout(()=>document.querySelector('#closeFilters').focus(),30)}
   function trapDrawer(event){const panel=document.querySelector('#filters.open');if(!panel||event.key!=='Tab')return;const focusable=[...panel.querySelectorAll('button,input,select,[tabindex]:not([tabindex="-1"])')].filter(element=>!element.disabled&&!element.hidden&&element.offsetParent!==null);const first=focusable[0],last=focusable[focusable.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}}
-  function toggleFilterGroup(button){const options=document.querySelector(`#${button.getAttribute('aria-controls')}`),expand=button.getAttribute('aria-expanded')!=='true',reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;button.setAttribute('aria-expanded',String(expand));if(reduced){options.hidden=!expand;return}if(expand){options.hidden=false;options.animate([{height:'0',opacity:0},{height:`${options.scrollHeight}px`,opacity:1}],{duration:180,easing:'ease-out'}).onfinish=()=>{options.style.height=''}}else{const animation=options.animate([{height:`${options.scrollHeight}px`,opacity:1},{height:'0',opacity:0}],{duration:160,easing:'ease-out'});animation.onfinish=()=>{options.hidden=true}}}
-
-  document.querySelectorAll('.filter-heading').forEach(button=>button.addEventListener('click',()=>toggleFilterGroup(button)));
   form.addEventListener('change',()=>{if(matchMedia('(max-width:800px)').matches){draft=readForm();updateDraftUi()}else{state=readForm();visibleCount=12;updateUrl();render()}});
   const search=document.querySelector('#shopSearch');search.value=state.q;document.querySelector('#searchClear').hidden=!state.q;
   search.addEventListener('input',()=>{document.querySelector('#searchClear').hidden=!search.value;clearTimeout(filterTimer);filterTimer=setTimeout(()=>{state.q=clean(search.value);visibleCount=matchMedia('(max-width:768px)').matches?8:12;updateUrl('replace');render()},200)});
