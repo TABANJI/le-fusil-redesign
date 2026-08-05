@@ -114,10 +114,10 @@ html[dir="rtl"] .spec-value{text-align:right}html[dir="rtl"] .product-desktop-st
 
 /* Selected Alternatives card rhythm. */
 .related-products .product-info{padding:32px 28px 30px}
-.related-products .product-info h3{min-height:2.24em;margin:10px 0 16px;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2}
-.related-products .product-buyline{min-height:30px;align-items:center;justify-content:flex-start;gap:12px}
+.related-products .product-info h3{min-height:2.24em;margin:8px 0 0;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+.related-products .product-buyline{min-height:30px;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:8px 22px;margin-top:26px;padding-top:0}
 .related-products .availability{min-height:30px;padding-inline:10px}
-.related-products .card-actions{margin-top:18px}
+.related-products .card-actions{margin-top:20px}
 .related-products .card-primary{min-height:48px;padding-block:0}
 
 @media(hover:hover) and (pointer:fine){
@@ -127,7 +127,7 @@ html[dir="rtl"] .spec-value{text-align:right}html[dir="rtl"] .product-desktop-st
 
 @media(max-width:768px){
   .related-products .product-info{padding:22px 24px 18px}
-  .related-products .product-info h3{display:-webkit-box;min-height:2.24em;margin:9px 0 14px;overflow:hidden;font-size:1.45rem;-webkit-box-orient:vertical;-webkit-line-clamp:2}
-  .related-products .product-buyline{min-height:30px}
-  .related-products .card-actions{margin-top:16px}
+  .related-products .product-info h3{display:-webkit-box;min-height:2.24em;margin:8px 0 0;overflow:hidden;font-size:1.45rem;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+  .related-products .product-buyline{min-height:30px;margin-top:26px}
+  .related-products .card-actions{margin-top:20px}
 }
