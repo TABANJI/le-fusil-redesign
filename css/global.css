@@ -45,8 +45,8 @@
 .footer-bottom nav a{margin:0;color:#8f8c83}
 .legal-strip{border-top:1px solid rgba(255,255,255,.04);color:#aaa79e}
 .mobile-menu{padding:0!important;background:#11120f}
-.mobile-menu-panel{display:flex;width:min(100%,560px);height:100%;margin-left:auto;flex-direction:column;padding:calc(24px + env(safe-area-inset-top)) 34px calc(28px + env(safe-area-inset-bottom));background:#171815;border-left:1px solid rgba(196,164,109,.18)}
-.mobile-menu-head{display:flex;align-items:center;justify-content:space-between;min-height:58px}
+.mobile-menu-panel{display:flex;width:min(100%,560px);height:100%;margin-left:auto;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;padding:calc(24px + env(safe-area-inset-top)) 34px calc(28px + env(safe-area-inset-bottom));background:#171815;border-left:1px solid rgba(196,164,109,.18);scrollbar-width:thin}
+.mobile-menu-head{position:sticky;z-index:2;top:0;display:flex;align-items:center;justify-content:space-between;min-height:58px;background:#171815}
 .mobile-menu-head .overlay-close{position:static;flex:0 0 48px}
 .mobile-menu nav{display:flex;margin:auto 0;flex-direction:column;gap:0;font:400 clamp(2.45rem,7vw,4rem)/1 var(--serif)}
 .mobile-menu nav a{position:relative;padding:12px 0;color:#d4d0c7}
@@ -64,7 +64,11 @@
 .mobile-menu-social a:nth-child(2) svg{width:22px;height:22px}
 .mobile-menu-social svg path{fill:currentColor;stroke:none}
 .mobile-menu .mobile-menu-foot>.language-switcher{margin-top:26px;margin-bottom:8px}
-.mobile-menu .mobile-menu-foot>.language-switcher,.mobile-menu .mobile-menu-foot .language-toggle{width:48px;min-width:48px;height:48px}
+.mobile-menu .mobile-menu-foot>.language-switcher{width:100%;min-width:0;height:auto;min-height:48px}
+.mobile-menu .mobile-menu-foot .language-toggle{width:48px;min-width:48px;height:48px}
+.mobile-menu .mobile-menu-foot .language-menu{position:static;z-index:auto;width:min(100%,280px);min-width:0;margin:10px 0 0;padding:6px;grid-template-columns:1fr;border-color:rgba(184,148,82,.3);box-shadow:none}
+.mobile-menu .mobile-menu-foot .language-menu.open{display:grid}
+.mobile-menu .mobile-menu-foot .language-menu button{width:100%;min-height:44px;padding:9px 12px;text-align:start;pointer-events:auto}
 .mobile-menu .mobile-menu-foot .language-toggle{border-width:1px;transition:color 200ms ease,border-color 200ms ease,opacity 200ms ease}
 .mobile-menu-foot .lang{display:block;width:auto;height:44px;color:#cbc7bd}
 .toast{right:24px;bottom:24px;border-left:2px solid var(--accent);background:#20211d;color:#f4f0e8}
