@@ -58,7 +58,7 @@
 .mobile-menu-foot p{max-width:390px;margin:20px 0 12px;color:#918e86;font-size:.78rem;line-height:1.65}
 .mobile-menu .mobile-menu-social{display:grid;gap:16px;margin:20px 0 0;font:inherit}
 .mobile-menu-social>span{color:var(--accent-light);font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
-.mobile-menu-social>div{display:flex;align-items:center;justify-content:flex-start;gap:16px}
+.mobile-menu-social>div{display:flex;align-items:center;justify-content:flex-start;gap:12px}
 .mobile-menu .mobile-menu-social a{display:grid;width:44px;height:44px;padding:0;place-items:center;color:#cbc7bd;transition:color 200ms ease,opacity 200ms ease}
 .mobile-menu-social svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.45}
 .mobile-menu-social a:nth-child(2) svg{width:22px;height:22px}
