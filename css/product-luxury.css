@@ -128,7 +128,7 @@ html[dir="rtl"] .spec-value{text-align:right}html[dir="rtl"] .product-desktop-st
 @media(max-width:768px){
   .related-products .product-info{padding:18px 24px}
   .related-products .product-brand,.related-products .product-info h3,.related-products .product-buyline{max-width:calc(100% - 12px);margin-inline-start:12px}
-  .related-products .product-brand{font-size:1.68rem;letter-spacing:.07em}
+  .related-products .product-brand{font-size:1.48rem;letter-spacing:.07em}
   .related-products .product-info h3{display:-webkit-box;min-height:0;margin-block:6px 0;overflow:hidden;font-size:1.45rem;-webkit-box-orient:vertical;-webkit-line-clamp:2}
   .related-products .product-buyline{min-height:30px;gap:8px 18px;margin-top:22px}
   .related-products .card-actions{margin-top:20px}
