@@ -1,3 +1,5 @@
+html:has(body.about-page){scroll-padding-top:calc(76px + env(safe-area-inset-top))}
+.about-page main section{scroll-margin-top:calc(76px + env(safe-area-inset-top))}
 .about-page .about-hero{padding:145px 0 74px}
 .about-page .about-hero p{max-width:560px;line-height:1.6}
 .about-page .about-approach{padding-block:94px}
@@ -5,8 +7,8 @@
 .about-page .about-approach .section-title{margin-bottom:0}
 .about-page .about-approach .content-grid>p{margin:0;line-height:1.7}
 .about-page .about-services{padding-block:80px;background:var(--bg-secondary)}
-.about-page .service{min-height:0;padding:31px 34px}
-.about-page .service h3{margin:14px 0 10px}
+.about-page .service{min-height:0;padding:27px 34px}
+.about-page .service h3{margin:11px 0 10px}
 .about-page .service p{margin:0}
 .about-page .about-visit{padding-block:88px}
 .about-page .showroom{padding:72px}
@@ -18,7 +20,8 @@
   .about-page .about-approach .section-title{margin-bottom:0}
   .about-page .about-services{padding:40px 0 48px}
   .about-page .services{grid-template-columns:1fr}
-  .about-page .service{padding:25px 24px}
-  .about-page .about-visit{padding-block:41px}
-  .about-page .showroom{padding:45px 24px}
+  .about-page .services{gap:0;border-top:1px solid var(--border);background:transparent}
+  .about-page .service{padding:22px 24px;border-bottom:1px solid var(--border)}
+  .about-page .about-visit{padding-block:37px}
+  .about-page .showroom{padding:41px 24px}
 }
