@@ -1,6 +1,6 @@
 (function footerAccordion(){
   'use strict';
-  const mobile=matchMedia('(max-width: 768px)'),reducedMotion=matchMedia('(prefers-reduced-motion: reduce)'),animations=new WeakMap(),tokens=new WeakMap();
+  const mobile=matchMedia('(max-width: 767px)'),reducedMotion=matchMedia('(prefers-reduced-motion: reduce)'),animations=new WeakMap(),tokens=new WeakMap();
   const finish=(group,expanded)=>{
     const summary=group.querySelector('summary'),content=group.querySelector('.product-footer-links');
     group.open=expanded;summary?.setAttribute('aria-expanded',String(expanded));
@@ -46,6 +46,6 @@
     mobile.addEventListener?.('change',()=>sync(grid));
     addEventListener('pageshow',()=>sync(grid));
   };
-  if(document.readyState==='complete')init();
+  if(document.readyState!=='loading')init();
   else addEventListener('DOMContentLoaded',init,{once:true});
 })();
