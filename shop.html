@@ -31,7 +31,7 @@
       <div class="collection-container collection-hero-content">
         <nav class="collection-breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Collection</span></nav>
         <div class="eyebrow">The LE FUSIL Collection</div>
-        <h1 id="collectionTitle">Fine Sporting Arms,<br>Curated with Purpose.</h1>
+        <h1 id="collectionTitle">Fine Sporting Arms<span class="collection-title-comma">,</span><br>Curated with Purpose.</h1>
         <p>Explore a considered selection of shotguns, sporting rifles and field equipment, presented for personal consultation and in-store viewing.</p>
         <div class="collection-hero-actions"><a class="btn" href="#collectionGrid">View All Pieces</a><a class="btn btn-outline" href="appointment.html?source=collection">Book a Private Viewing</a></div>
         <div class="collection-stats"><span><strong id="heroPieceCount">0</strong> pieces</span><span><strong id="heroMakerCount">0</strong> makers</span><span>Jdeideh showroom</span><span>Current collection · Availability confirmed personally</span></div>
@@ -41,6 +41,7 @@
     <section class="collection-toolbar" aria-label="Collection controls">
       <div class="collection-container toolbar-inner">
         <div class="toolbar-summary"><strong id="resultCount" aria-live="polite">0 Pieces</strong><span id="collectionLabel">All Collection</span></div>
+        <button type="button" class="mobile-filter-button" id="openFilters" aria-controls="filters" aria-expanded="false"><span class="filter-toggle-label">Filter</span><span id="mobileFilterCount"></span><span class="filter-toggle-icon" aria-hidden="true">+</span></button>
         <div class="toolbar-controls">
           <div class="collection-search">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
@@ -51,11 +52,10 @@
           <label class="sort-control"><span>Sort by</span><select id="sort" aria-label="Sort collection"><option value="featured">Featured</option><option value="name-asc">Name: A–Z</option><option value="name-desc">Name: Z–A</option><option value="price-asc">Price: Low to High</option><option value="price-desc">Price: High to Low</option><option value="maker-asc">Maker: A–Z</option></select></label>
           <button type="button" class="toolbar-clear" id="toolbarClear" hidden>Clear Filters</button>
           <div class="view-controls" aria-label="Grid view">
-            <button type="button" data-view="three" aria-label="Three-column view" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="5" height="16"/><rect x="9.5" y="4" width="5" height="16"/><rect x="16" y="4" width="5" height="16"/></svg></button>
+            <button type="button" data-view="three" aria-label="Four-column view" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="3.5" height="16"/><rect x="7.8" y="4" width="3.5" height="16"/><rect x="12.6" y="4" width="3.5" height="16"/><rect x="17.4" y="4" width="3.5" height="16"/></svg></button>
             <button type="button" data-view="two" aria-label="Two-column editorial view" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="8" height="16"/><rect x="13" y="4" width="8" height="16"/></svg></button>
           </div>
         </div>
-        <button type="button" class="mobile-filter-button" id="openFilters" aria-controls="filters" aria-expanded="false">Filters <span id="mobileFilterCount"></span></button>
       </div>
     </section>
 

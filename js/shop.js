@@ -97,8 +97,14 @@
     wrap.hidden=!chips.length;
     wrap.innerHTML=chips.map(chip=>`<button type="button" class="filter-chip" data-remove-filter="${chip.key}" data-filter-value="${encodeURIComponent(chip.value)}" aria-label="Remove ${chip.label} filter">${chip.label} ×</button>`).join('')+(chips.length?'<button type="button" class="clear-all" data-clear-all>Clear All</button>':'');
   }
+  function fillDesktopFourColumnRow(total){
+    if(!matchMedia('(min-width:801px)').matches||view==='two'||visibleCount>=total)return;
+    const remainder=visibleCount%4;
+    if(remainder)visibleCount=Math.min(total,visibleCount+(4-remainder));
+  }
   function render(){
     const list=sorted(filtered());
+    fillDesktopFourColumnRow(list.length);
     const shown=list.slice(0,visibleCount);
     const fragment=document.createDocumentFragment();
     shown.forEach((item,index)=>{const template=document.createElement('template');template.innerHTML=productCard(item).trim();fragment.appendChild(template.content.firstElementChild);if(index===5&&!state.q&&!activeCount()){const editorial=document.createElement('aside');editorial.className='collection-editorial-break';editorial.innerHTML='<div class="eyebrow">Private Showroom Selection</div><h2>Selected for Personal Viewing.</h2><p>Discover the current collection in person and receive individual guidance from the LE FUSIL team.</p><a href="appointment.html?source=collection">Book a Private Viewing <span aria-hidden="true">→</span></a>';fragment.appendChild(editorial)}});
@@ -116,9 +122,11 @@
     renderChips();syncShortlist();
   }
   function clearAll(push=true){state={category:[],brand:[],calibre:[],availability:[],price:[],condition:[],origin:[],featured:false,q:'',sort:'featured'};draft=copyState(state);visibleCount=matchMedia('(max-width:768px)').matches?8:12;document.querySelector('#shopSearch').value='';document.querySelector('#sort').value='featured';document.querySelector('#searchClear').hidden=true;syncForm();if(push)updateUrl();render()}
-  function hideDrawer(apply=false){const panel=document.querySelector('#filters'),overlay=document.querySelector('#filterOverlay');if(!apply){draft=copyState(state);syncForm(state);updateDraftUi()}panel.classList.remove('open');panel.setAttribute('aria-hidden','true');panel.removeAttribute('role');panel.removeAttribute('aria-modal');overlay.classList.remove('open');overlay.hidden=true;document.querySelector('#openFilters').setAttribute('aria-expanded','false');document.body.classList.remove('lock');drawerReturnFocus?.focus()}
+  const desktopFilterLayout=matchMedia('(min-width:801px)'),filterToggle=document.querySelector('#openFilters'),filterToggleLabel=filterToggle.querySelector('.filter-toggle-label'),filterToggleIcon=filterToggle.querySelector('.filter-toggle-icon');
+  function syncFilterToggle(open){filterToggle.setAttribute('aria-expanded',String(open));filterToggleLabel.textContent=open?'Close':desktopFilterLayout.matches?'Filter':'Filters';filterToggleIcon.textContent=open?'−':'+'}
+  function hideDrawer(apply=false){const panel=document.querySelector('#filters'),overlay=document.querySelector('#filterOverlay');if(!apply){draft=copyState(state);syncForm(state);updateDraftUi()}panel.classList.remove('open');panel.setAttribute('aria-hidden','true');panel.removeAttribute('role');panel.removeAttribute('aria-modal');overlay.classList.remove('open');overlay.hidden=true;syncFilterToggle(false);document.body.classList.remove('lock');drawerReturnFocus?.focus()}
   function closeDrawer(apply=false){if(drawerHistoryActive&&!apply){history.back();return}hideDrawer(apply)}
-  function openDrawer(){draft=copyState(state);syncForm(draft);updateDraftUi();const panel=document.querySelector('#filters'),overlay=document.querySelector('#filterOverlay');drawerReturnFocus=document.activeElement;panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');panel.classList.add('open');panel.setAttribute('aria-hidden','false');overlay.hidden=false;requestAnimationFrame(()=>overlay.classList.add('open'));document.querySelector('#openFilters').setAttribute('aria-expanded','true');document.body.classList.add('lock');history.pushState({...history.state,filterDrawer:true},'',location.href);drawerHistoryActive=true;setTimeout(()=>document.querySelector('#closeFilters').focus(),30)}
+  function openDrawer(){draft=copyState(state);syncForm(draft);updateDraftUi();const panel=document.querySelector('#filters'),overlay=document.querySelector('#filterOverlay');drawerReturnFocus=document.activeElement;panel.classList.add('open');panel.setAttribute('aria-hidden','false');syncFilterToggle(true);if(desktopFilterLayout.matches){setTimeout(()=>document.querySelector('.filter-heading')?.focus(),30);return}panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');overlay.hidden=false;requestAnimationFrame(()=>overlay.classList.add('open'));document.body.classList.add('lock');history.pushState({...history.state,filterDrawer:true},'',location.href);drawerHistoryActive=true;setTimeout(()=>document.querySelector('#closeFilters').focus(),30)}
   function trapDrawer(event){const panel=document.querySelector('#filters.open');if(!panel||event.key!=='Tab')return;const focusable=[...panel.querySelectorAll('button,input,select,[tabindex]:not([tabindex="-1"])')].filter(element=>!element.disabled&&!element.hidden&&element.offsetParent!==null);const first=focusable[0],last=focusable[focusable.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}}
   form.addEventListener('change',()=>{if(matchMedia('(max-width:800px)').matches){draft=readForm();updateDraftUi()}else{state=readForm();visibleCount=12;updateUrl();render()}});
   const search=document.querySelector('#shopSearch');search.value=state.q;document.querySelector('#searchClear').hidden=!state.q;
@@ -130,7 +138,7 @@
   document.querySelector('#activeFilters').addEventListener('click',event=>{const remove=event.target.closest('[data-remove-filter]');if(event.target.closest('[data-clear-all]')){clearAll();return}if(!remove)return;const key=remove.dataset.removeFilter,value=decodeURIComponent(remove.dataset.filterValue);if(key==='featured')state.featured=false;else if(key==='q'){state.q='';search.value='';document.querySelector('#searchClear').hidden=true}else state[key]=state[key].filter(item=>item!==value);syncForm();updateUrl();render()});
   document.querySelector('#emptyClear').addEventListener('click',()=>clearAll());
   document.querySelector('#toolbarClear').addEventListener('click',()=>clearAll());
-  document.querySelector('#openFilters').addEventListener('click',openDrawer);
+  filterToggle.addEventListener('click',()=>document.querySelector('#filters').classList.contains('open')?closeDrawer():openDrawer());
   document.querySelector('#closeFilters').addEventListener('click',()=>closeDrawer());
   document.querySelector('#filterOverlay').addEventListener('click',()=>closeDrawer());
   document.querySelector('#drawerClear').addEventListener('click',()=>{draft={category:[],brand:[],calibre:[],availability:[],price:[],condition:[],origin:[],featured:false,q:state.q,sort:state.sort};syncForm(draft);updateDraftUi()});
@@ -139,7 +147,9 @@
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.querySelector('#filters.open')){event.preventDefault();closeDrawer()}trapDrawer(event)});
   addEventListener('popstate',()=>{if(drawerHistoryActive||document.querySelector('#filters.open')){drawerHistoryActive=false;hideDrawer(false);return}const current=new URLSearchParams(location.search);state={category:current.get('category')?.split(',').map(clean).filter(Boolean)||[],brand:current.get('brand')?.split(',').map(clean).filter(Boolean)||[],calibre:current.get('calibre')?.split(',').map(clean).filter(Boolean)||[],availability:current.get('availability')?.split(',').map(clean).filter(Boolean)||[],price:current.get('price')?.split(',').map(clean).filter(Boolean)||[],condition:current.get('condition')?.split(',').map(clean).filter(Boolean)||[],origin:current.get('origin')?.split(',').map(clean).filter(Boolean)||[],featured:current.get('featured')==='true',q:clean(current.get('q')),sort:current.get('sort')||'featured'};search.value=state.q;document.querySelector('#searchClear').hidden=!state.q;sort.value=state.sort;syncForm();render()});
 
-  if(matchMedia('(max-width:800px)').matches)document.querySelector('#filters').setAttribute('aria-hidden','true');
+  document.querySelector('#filters').setAttribute('aria-hidden','true');
+  if(desktopFilterLayout.matches)syncFilterToggle(false);
+  desktopFilterLayout.addEventListener?.('change',()=>{const panel=document.querySelector('#filters');panel.classList.remove('open');panel.setAttribute('aria-hidden','true');syncFilterToggle(false)});
   syncForm();render();
   const productionBase='https://tabanji.github.io/le-fusil-redesign/';
   const itemList={"@context":"https://schema.org","@type":"CollectionPage",name:"Explore the Collection | LE FUSIL",url:`${productionBase}shop.html`,description:"Curated sporting arms, equipment and field essentials selected for personal showroom presentation.",mainEntity:{"@type":"ItemList",itemListElement:products.map((item,index)=>({"@type":"ListItem",position:index+1,url:`${productionBase}product.html?slug=${encodeURIComponent(item.slug)}`,name:item.name}))}};
