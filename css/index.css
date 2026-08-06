@@ -185,4 +185,10 @@ linear-gradient(125deg,#11120f,#474537)}.hero-copy{max-width:780px;padding-top:8
 @media(hover:hover) and (pointer:fine){.product-card:hover{border-color:rgba(155,122,69,.16)}.shortlist:hover{transform:scale(1.04)}}
 @media(max-width:640px){.product-info{padding:24px 22px}.product-info h3{margin-bottom:18px}}
 .product-image picture{display:block;width:100%;height:100%}
+
+@media(max-width:800px){
+  :is(.home-page .signature-section,.shop-page .catalog-grid) .product-image{aspect-ratio:4/3;border:0;background:#ded4c4}
+  :is(.home-page .signature-section,.shop-page .catalog-grid) .product-image img{width:100%;height:100%;padding:0;object-fit:cover;object-position:center}
+  :is(.home-page .signature-section,.shop-page .catalog-grid) .shortlist{top:18px;right:18px;width:44px;height:44px;box-shadow:0 3px 10px rgba(24,24,20,.05)}
+}
 .showroom-editorial-media>picture,.collection-editorial-image>picture{position:absolute;inset:0}

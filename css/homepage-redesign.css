@@ -101,8 +101,6 @@ body.home-page .heritage-hero h1 span{color:#ddd5ca}
   .home-page .signature-section .products-grid{padding-top:46px;row-gap:32px}
   .home-page .signature-section .products-grid:before{width:max-content;min-width:180px;grid-column:1/-1;margin:0 auto -12px;padding-bottom:9px;border-bottom:1px solid rgba(169,131,69,.45);color:var(--color-bronze);content:"SELECTED PIECES";font-size:11px;font-weight:600;letter-spacing:.3em;line-height:1;text-align:center}
   .home-page .signature-section .product-card{border:1px solid rgba(181,145,82,.18)}
-  .home-page .signature-section .product-image{aspect-ratio:1.14;border:0}
-  .home-page .signature-section .product-image img{filter:brightness(.95) contrast(1.05) saturate(1.04) sepia(.03)}
   .home-page .signature-section .product-info{padding-bottom:12px}
   .home-page .signature-section .product-buyline{gap:20px}
   .home-page .signature-section .price{font-size:calc(1.3rem + 2px);font-weight:500}
