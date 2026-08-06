@@ -16,8 +16,8 @@
       details.append(summary,content);group.replaceWith(details);
     });
     sync(grid);grid.classList.add('footer-accordion-ready');
-    mobile.addEventListener?.('change',()=>sync(grid));
-    addEventListener('pageshow',()=>sync(grid));
+    if(!grid.dataset.footerAccordionBound){grid.dataset.footerAccordionBound='true';mobile.addEventListener?.('change',()=>sync(grid));addEventListener('pageshow',()=>sync(grid))}
   };
+  addEventListener('lefusil:footer-updated',init);
   if(window.LEFUSIL_ACCORDION){if(document.readyState!=='loading')init();else addEventListener('DOMContentLoaded',init,{once:true})}else addEventListener('lefusil:accordion-ready',init,{once:true});
 })();
