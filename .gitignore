@@ -2,5 +2,4 @@
 .env.*
 !.env.example
 .supabase/
-js/runtime-config.js
 dist/
