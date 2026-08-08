@@ -5,17 +5,12 @@
   const $=(selector,root=document)=>root.querySelector(selector),$$=(selector,root=document)=>[...root.querySelectorAll(selector)];
   const escapeHtml=value=>String(value??'').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
   const money=value=>Number(value)>0?new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(value):'Price on Request';
-  const sessionKey=store.KEYS.session;
   let currentView='overview',page=1,pendingImport=null,returnFocus=null,confirmCallback=null,statusTimer;
   const app=$('#adminApp'),access=$('#accessScreen'),productModal=$('#productModal'),confirmModal=$('#confirmModal');
   function announce(message){const status=$('#adminStatus');status.textContent=message;status.classList.add('show');clearTimeout(statusTimer);statusTimer=setTimeout(()=>status.classList.remove('show'),3200)}
-  function isSession(){return sessionStorage.getItem(sessionKey)==='true'||localStorage.getItem(sessionKey)==='true'}
-  function setSession(remember){(remember?localStorage:sessionStorage).setItem(sessionKey,'true')}
-  function clearSession(){localStorage.removeItem(sessionKey);sessionStorage.removeItem(sessionKey)}
   function showApp(){access.hidden=true;app.hidden=false;renderAll();$('#adminMain').focus()}
-  function showLogin(){app.hidden=true;access.hidden=false;setTimeout(()=>$('#loginForm [name=email]').focus(),30)}
-  $('#loginForm').addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget,data=new FormData(form),email=String(data.get('email')).trim(),password=String(data.get('password'));if(email!=='admin@lefusil.demo'||password!=='LEFUSIL-DEMO'){$('#loginMessage').textContent='Incorrect demonstration credentials.';form.elements.password.value='';form.elements.password.focus();return}setSession(data.get('remember')==='on');store.audit('login','Demonstration session started.');form.reset();$('#loginMessage').textContent='';showApp()});
-  $('#logoutButton').addEventListener('click',()=>{store.audit('logout','Demonstration session ended.');clearSession();closeSidebar();showLogin()});
+  function showLogin(message=''){app.hidden=true;access.hidden=false;$('#loginMessage').textContent=message;setTimeout(()=>$('#loginForm [name=email]').focus(),30)}
+  $('#logoutButton').addEventListener('click',async()=>{closeSidebar();await window.LEFUSIL_AUTH?.signOut();showLogin()});
   function switchView(view){currentView=view;$$('[data-panel]').forEach(panel=>panel.classList.toggle('active',panel.dataset.panel===view));$$('[data-view]').forEach(button=>button.classList.toggle('active',button.dataset.view===view));const labels={overview:['Dashboard','Overview'],products:['Catalog Management','Products'],media:['Catalog Assets','Media Library'],inquiries:['Private Requests','Inquiries'],crm:['Client Relationships','Customer CRM'],settings:['Admin Preview','Collection Settings'],transfer:['Portability','Import / Export']};$('#viewEyebrow').textContent=labels[view][0];$('#viewTitle').textContent=labels[view][1];$('#addProduct').hidden=view!=='products';closeSidebar();$(`[data-panel="${view}"]`).focus?.();if(view==='products')renderProducts();if(view==='media')window.LEFUSIL_MEDIA?.render();if(view==='crm')window.LEFUSIL_CRM?.render();if(view==='inquiries')renderInquiries();if(view==='overview')renderOverview()}
   $$('[data-view]').forEach(button=>button.addEventListener('click',()=>switchView(button.dataset.view)));
   const sidebar=$('#adminSidebar'),drawer=$('#drawerBackdrop'),menuButton=$('#openSidebar');
@@ -89,5 +84,7 @@
   function renderAll(){renderOverview();renderProducts();renderInquiries();syncInquiryFilters();renderSettings()}
   $('#previewProduct').insertAdjacentHTML('beforebegin','<button class="admin-button secondary" id="previewCard" type="button">Preview Card</button>');
   $('#previewCard').addEventListener('click',()=>{const data=editorData(),win=open('','_blank','noopener,noreferrer');if(!win){announce('Preview window was blocked.');return}win.document.write(`<!doctype html><title>Local demo preview</title><style>body{margin:0;padding:8vw;background:#eee9df;color:#171815;font-family:Arial}.card{max-width:430px;background:#f7f3ec;box-shadow:0 18px 45px #0002}.image{display:grid;aspect-ratio:4/3;place-items:center;background:#e3ddd2}.image img{max-width:88%;max-height:88%;object-fit:contain}.copy{padding:26px}small{color:#9b7a45;letter-spacing:.18em;text-transform:uppercase}h1{font:2.2rem Georgia;margin:.35em 0}.price{font:1.3rem Georgia}</style><p>Local demo preview</p><article class="card"><div class="image">${data.image?`<img src="${escapeHtml(data.image)}" alt="">`:'Image path required'}</div><div class="copy"><small>${escapeHtml(data.brand)}</small><h1>${escapeHtml(data.name||'Untitled product')}</h1><p class="price">${money(data.priceOnRequest?null:data.price)}</p><span>${escapeHtml(data.status)}</span></div></article>`);win.document.close()});
-  if(isSession())showApp();else showLogin();
+  function applyAuthState(auth){if(auth.status==='authenticated'&&['manager','admin'].includes(auth.role)){showApp();return}if(auth.status==='authenticated'){location.replace('index.html?account=1&denied=admin');return}showLogin(auth.status==='unavailable'?'Authentication is not configured yet.':'')}
+  addEventListener('lefusil:auth-change',event=>applyAuthState(event.detail));
+  const initialAuth=window.LEFUSIL_AUTH?.getState();if(initialAuth&&initialAuth.status!=='loading')applyAuthState(initialAuth);else showLogin();
 })();

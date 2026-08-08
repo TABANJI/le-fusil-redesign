@@ -13,5 +13,12 @@ $config=[ordered]@{environment='production';publicSiteUrl=$publicUrl.TrimEnd('/'
 $json=$config|ConvertTo-Json -Compress
 $runtime="(function(g){'use strict';g.LEFUSIL_RUNTIME_CONFIG=$json;})(window);"
 Set-Content -LiteralPath (Join-Path $dist 'js\runtime-config.js') -Value $runtime -Encoding UTF8
+Get-ChildItem -LiteralPath $dist -Filter *.html | ForEach-Object {
+  $html=Get-Content -Raw -LiteralPath $_.FullName
+  if($html -notmatch 'js/runtime-config\.js'){
+    $html=$html.Replace('</head>','<script src="js/runtime-config.js"></script></head>')
+    Set-Content -LiteralPath $_.FullName -Value $html -Encoding UTF8
+  }
+}
 if((Get-ChildItem $dist -Recurse -File|Select-String -Pattern 'SUPABASE_SERVICE_ROLE_KEY|DATABASE_PASSWORD|JWT_SECRET')){throw 'Forbidden server secret name found in build output.'}
 Write-Output 'Production artifact generated. Configuration values were not printed.'

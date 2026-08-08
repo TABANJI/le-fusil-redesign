@@ -1,0 +1,18 @@
+@media(max-width:800px){
+  .mobile-account{display:grid;gap:2px;margin-top:22px;padding-top:18px;border-top:1px solid rgba(184,148,82,.2)}
+  .mobile-account strong{padding:0 0 8px;color:var(--color-brand-brass,#b89452);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase}
+  .mobile-account a,.mobile-account button{display:flex;width:100%;min-height:44px;align-items:center;padding:0;border:0;background:transparent;color:#ddd9d0;font:600 .68rem/1 var(--sans,Arial);letter-spacing:.1em;text-decoration:none;text-transform:uppercase}
+  .account-panel{position:fixed;z-index:260;inset:0;display:grid;padding:calc(20px + env(safe-area-inset-top)) 18px calc(20px + env(safe-area-inset-bottom));place-items:center;background:rgba(10,11,9,.94);transition:opacity 180ms ease,visibility 180ms ease}
+  .account-panel[aria-hidden=true]{visibility:hidden;opacity:0;pointer-events:none}
+  .account-dialog{position:relative;width:min(100%,430px);padding:32px 24px;border:1px solid rgba(184,148,82,.3);background:#171815;color:#eee9df}
+  .account-dialog h2{margin:8px 0 10px;font:400 2.5rem/1 var(--serif,Georgia)}
+  .account-dialog>p{margin:0 0 24px;color:#aaa79e;line-height:1.55}
+  .account-close{position:absolute;top:12px;right:12px;width:44px;height:44px;border:0;background:transparent;color:#eee9df;font-size:1.5rem}
+  .account-dialog form{display:grid;gap:15px}
+  .account-dialog label{display:grid;gap:7px;color:#c9c5bc;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+  .account-dialog input{width:100%;min-height:52px;padding:10px 13px;border:1px solid #4a4b44;background:#1e1f1b;color:#eee9df;font:inherit}
+  .account-dialog button[type=submit]{min-height:52px;border:1px solid #a9844d;background:#a9844d;color:#111;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+  .account-forgot{min-height:44px;align-content:center;color:#d0ad74;font-size:.68rem}
+  .auth-message,.auth-unavailable{min-height:20px;margin:0;color:#d9a39b;font-size:.75rem;line-height:1.4}
+}
+@media(min-width:801px){.account-panel{display:none}.mobile-account{display:none}}
