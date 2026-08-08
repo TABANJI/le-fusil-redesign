@@ -43,24 +43,34 @@
   .shop-page .collection-sourcing{padding:58px 0}
   .shop-page .sourcing-inner{align-items:center}
   .shop-page .sourcing-inner .btn{display:inline-flex;align-items:center;justify-content:center}
-  .shop-page .footer{padding-top:60px}
-  .shop-page .footer>.container{width:min(calc(100% - 64px),1500px)}
-  .shop-page .footer-lead{align-items:center;padding:32px 0 28px}
-  .shop-page .footer-lead h2{margin-top:8px}
-  .shop-page .footer-lead .btn{display:inline-flex;width:auto;min-height:46px;align-items:center;justify-content:center;padding-block:0;line-height:1}
-  .shop-page .footer-grid{display:grid;grid-template-columns:minmax(0,30%) minmax(0,1fr);grid-template-rows:repeat(5,minmax(44px,auto));column-gap:clamp(70px,7vw,100px);row-gap:0;align-content:start;align-items:start}
-  .shop-page .footer-grid{padding-top:28px}
-  .shop-page .footer-brand{grid-column:1;grid-row:1/span 5;max-width:none;margin:0;contain:size}
-  .shop-page .footer-brand h3{display:flex;min-height:44px;align-items:center;margin:0 0 14px;line-height:1}
-  .shop-page .footer-brand p{margin:0 0 10px}
-  .shop-page .footer-brand a{margin:0}
-  .shop-page .product-footer-group,
-  .shop-page .product-footer-group:last-of-type{grid-column:2;min-height:0;margin:0;padding:0;border:0}
-  .shop-page .product-footer-group>summary{box-sizing:border-box;display:flex;width:100%;height:44px;min-height:44px;align-items:center;justify-content:space-between;margin:0;padding:0;line-height:1;border-bottom:1px solid rgba(184,148,82,.18)}
-  .shop-page .product-footer-group>summary:after{position:static;align-self:center;margin:0 0 0 auto;line-height:1}
-  .shop-page .footer-bottom{align-items:baseline;margin-top:12px;padding-top:12px}
-  .shop-page .footer-bottom nav{align-items:baseline}
-  .shop-page .footer{padding-bottom:14px}
+  :is(.shop-page,.about-page,.contact-page,.appointment-page) .footer{padding-top:60px}
+  :is(.shop-page,.about-page,.contact-page,.appointment-page) .footer>.container{width:min(calc(100% - 64px),1500px)}
+  :is(.shop-page,.about-page,.contact-page,.appointment-page) .footer-lead{display:flex;align-items:center;padding:32px 0 28px}
+  :is(.shop-page,.about-page,.contact-page,.appointment-page) .footer-lead h2{margin-top:8px}
+  :is(.shop-page,.about-page,.contact-page,.appointment-page) .footer-lead .btn{display:inline-flex;width:auto;min-height:46px;align-items:center;justify-content:center;padding-block:0;line-height:1}
+  .appointment-page .footer-lead>div{width:100%}
+  .appointment-page .footer-lead h2{max-width:none;white-space:nowrap}
+  .appointment-page .footer-lead .btn{display:none}
+  .shop-page .footer-lead>div{width:100%}
+  .shop-page .footer-lead h2{max-width:none;white-space:nowrap}
+  .shop-page .footer-lead .btn{display:none}
+  :is(.shop-page,.about-page,.contact-page,.appointment-page) .footer-grid{display:grid;grid-template-columns:minmax(0,30%) minmax(0,1fr);grid-template-rows:repeat(5,minmax(44px,auto));column-gap:clamp(70px,7vw,100px);row-gap:0;align-content:start;align-items:start;padding-top:28px}
+  :is(.shop-page,.about-page,.contact-page,.appointment-page) .footer-brand{grid-column:1;grid-row:1/span 5;max-width:none;margin:0;contain:size}
+  :is(.shop-page,.about-page,.contact-page,.appointment-page) .footer-brand h3{display:flex;min-height:44px;align-items:center;margin:0 0 14px;line-height:1}
+  :is(.shop-page,.about-page,.contact-page,.appointment-page) .footer-brand p{margin:0 0 10px}
+  :is(.shop-page,.about-page,.contact-page,.appointment-page) .footer-brand a{margin:0}
+  :is(.shop-page,.about-page,.contact-page,.appointment-page) .footer-brand [data-showroom-location],
+  :is(.shop-page,.about-page,.contact-page,.appointment-page) .footer-brand [data-showroom-location]+a{display:block}
+  :is(.shop-page,.about-page,.contact-page,.appointment-page) .product-footer-group,
+  :is(.shop-page,.about-page,.contact-page,.appointment-page) .product-footer-group:last-of-type{grid-column:2;min-height:0;margin:0;padding:0;border:0}
+  :is(.shop-page,.about-page,.contact-page,.appointment-page) .product-footer-group>summary{box-sizing:border-box;display:flex;width:100%;height:44px;min-height:44px;align-items:center;justify-content:space-between;margin:0;padding:0;line-height:1;border-bottom:1px solid rgba(184,148,82,.18)}
+  :is(.shop-page,.about-page,.contact-page,.appointment-page) .product-footer-group>summary:after{position:static;align-self:center;margin:0 0 0 auto;content:"+";color:var(--color-text-muted-light);font-size:1rem;font-weight:400;line-height:1;transition:opacity 210ms cubic-bezier(.4,0,.2,1),transform 210ms cubic-bezier(.4,0,.2,1)}
+  :is(.about-page,.contact-page,.appointment-page) .product-footer-group[open]>summary:after,:is(.about-page,.contact-page,.appointment-page) .product-footer-group>summary[aria-expanded=true]:after{content:"−";transform:rotate(180deg)}
+  :is(.shop-page,.about-page,.contact-page,.appointment-page) .product-footer-group{width:min(100%,260px);justify-self:start}
+  .shop-page .footer-grid>.product-footer-group{width:260px;max-width:260px}
+  :is(.shop-page,.about-page,.contact-page,.appointment-page) .footer-bottom{align-items:baseline;margin-top:12px;padding-top:12px}
+  :is(.shop-page,.about-page,.contact-page,.appointment-page) .footer-bottom nav{align-items:baseline}
+  :is(.shop-page,.about-page,.contact-page,.appointment-page) .footer{padding-bottom:14px}
 }
 
 @media(prefers-reduced-motion:reduce){.product-footer-group>summary:after{transition:none}}

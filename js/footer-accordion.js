@@ -4,7 +4,7 @@
   const mediaFor=grid=>matchMedia(grid.dataset.accordionMedia||'(max-width: 767px)');
   const sync=grid=>{const accordion=mediaFor(grid);grid.querySelectorAll('[data-accordion-trigger]').forEach(trigger=>window.LEFUSIL_ACCORDION?.set(trigger,!accordion.matches,false))};
   const init=()=>{
-    const grid=document.querySelector('.footer-grid');if(!grid||!window.LEFUSIL_ACCORDION||document.body.classList.contains('home-page'))return;grid.dataset.accordionGroup='footer';grid.dataset.accordionMedia=document.body.classList.contains('shop-page')?'(min-width: 0px)':'(max-width: 767px)';
+    const grid=document.querySelector('.footer-grid');if(!grid||!window.LEFUSIL_ACCORDION||document.body.classList.contains('home-page'))return;grid.dataset.accordionGroup='footer';grid.dataset.accordionMedia=document.body.classList.contains('shop-page')?'(min-width: 0px)':document.body.matches('.about-page,.contact-page,.appointment-page')?'(max-width: 767px), (min-width: 1025px)':'(max-width: 767px)';
     [...grid.children].filter(group=>!group.classList.contains('footer-brand')).forEach((group,index)=>{
       if(group.matches('details'))return;
       const heading=group.querySelector('h4');if(!heading)return;
