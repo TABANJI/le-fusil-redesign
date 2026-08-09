@@ -34,6 +34,6 @@
 if(!document.querySelector('link[href*="footer-accordion.css"]'))document.head.insertAdjacentHTML('beforeend','<link rel="stylesheet" href="css/footer-accordion.css?v=20260808-3">');
 if(!document.querySelector('link[href*="auth.css"]'))document.head.insertAdjacentHTML('beforeend','<link rel="stylesheet" href="css/auth.css?v=20260809-1">');
 addEventListener('DOMContentLoaded',()=>import('./footer-accordion.js?v=20260808-2'),{once:true});
-addEventListener('DOMContentLoaded',async()=>{if(!globalThis.LEFUSIL_RUNTIME_CONFIG)await new Promise(resolve=>{const script=document.createElement('script');script.src='js/runtime-config.js';script.onload=script.onerror=resolve;document.head.appendChild(script)});await import('./auth.js?v=20260809-2')},{once:true});
+addEventListener('DOMContentLoaded',async()=>{if(!globalThis.LEFUSIL_RUNTIME_CONFIG)await new Promise(resolve=>{const script=document.createElement('script');script.src='js/runtime-config.js';script.onload=script.onerror=resolve;document.head.appendChild(script)});await import('./auth.js?v=20260809-3')},{once:true});
   document.body.insertAdjacentHTML('beforeend',overlays);
 })();
